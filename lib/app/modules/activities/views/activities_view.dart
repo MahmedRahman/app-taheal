@@ -1,3 +1,4 @@
+import 'package:eradah/app/modules/activities/model/vedio_model.dart';
 import 'package:eradah/app/routes/app_pages.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -6,35 +7,8 @@ import 'package:eradah/app/modules/activities/controllers/activities_controller.
 import 'package:lottie/lottie.dart';
 
 class ActivitiesView extends GetView<ActivitiesController> {
-  List<String> imageList = [
-    'asset/activities/01.svg',
-    'asset/activities/02.svg',
-    'asset/activities/03.svg',
-    'asset/activities/04.svg',
-    'asset/activities/05.svg',
-    'asset/activities/06.svg',
-    'asset/activities/07.svg',
-  ];
 
-  List<String> titleList = [
-    'مساعدة الطفل على رفع راسه و التحكم بها',
-    'تشجيع الإستدارة و الإلتواء',
-    'المساعدة على الإمساك بالأشياء و الوصول اليها و التنسيق بين اليد و العين',
-    'الزحف و الحبو',
-    'التحكم بالجذع و التوازن و الجلوس',
-    'التحكم في الحوض و الوقوف',
-    'المشي و التوازن',
-  ];
-
-  List<Color> colorList = [
-    Color(0XFF0DB7C5),
-    Color(0xFFD60B51),
-    Color(0XFFD4B100),
-    Color(0xFF00B52A),
-    Color(0XFF699799),
-    Color(0xFFD60B51),
-    Color(0xFF00B52A),
-  ];
+ActivitiesController controller = Get.put(ActivitiesController());
 
   @override
   Widget build(BuildContext context) {
@@ -43,42 +17,64 @@ class ActivitiesView extends GetView<ActivitiesController> {
         child: Column(
           children: [
             bulidSlider(),
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 15),
-              child: Column(
-                  children: List.generate(7, (index) {
-                return Padding(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 8,
-                    vertical: 5,
-                  ),
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: colorList.elementAt(index),
-                      borderRadius: BorderRadius.all(Radius.circular(20)),
-                    ),
-                    height: 90,
-                    child: Center(
-                      child: ListTile(
-                        onTap: () {
-                          Get.toNamed(Routes.ActivitesListVideoView);
-                        },
-                        title: Text(
-                          titleList.elementAt(index),
-                          textAlign: TextAlign.right,
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 12,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        leading: SvgPicture.asset(imageList.elementAt(index)),
+            FutureBuilder(
+              future: controller.allCategories(),
+              builder: (index, snapshot) {
+                if (snapshot.connectionState == ConnectionState.done) {
+                  if (snapshot.hasError) {
+                    return Center(
+                      child: Text(
+                        '${snapshot.error} occured',
+                        style: TextStyle(fontSize: 18),
                       ),
-                    ),
-                  ),
+                    );
+                  } else if (snapshot.hasData) {
+                    // Extracting data from snapshot object
+                    List<Datum> data = snapshot.data;
+                    return Column(
+                      children: List.generate(data.length, (index) {
+                        return Padding(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 8,
+                            vertical: 5,
+                          ),
+                          child: Container(
+                            decoration: BoxDecoration(
+                              color: Colors.grey,
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(20)),
+                            ),
+                            height: 90,
+                            child: Center(
+                              child: ListTile(
+                                  onTap: () {
+                                    Get.toNamed(Routes.ActivitesListVideoView);
+                                  },
+                                  title: Text(
+                                    data.elementAt(index).title,
+                                    textAlign: TextAlign.right,
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  leading:
+                                      Image.network(data.elementAt(index).img)
+                                  //SvgPicture.network(data.elementAt(index).img),
+                                  ),
+                            ),
+                          ),
+                        );
+                      }).toList(),
+                    );
+                  }
+                }
+                return Center(
+                  child: CircularProgressIndicator(),
                 );
-              }).toList()),
-            )
+              },
+            ),
           ],
         ),
       ),
@@ -146,7 +142,9 @@ Container bulidSlider() {
                     ),
                     ElevatedButton(
                       child: Text('اشترك الان'),
-                      onPressed: () {},
+                      onPressed: () {
+                        print('object');
+                      },
                       style:
                           ElevatedButton.styleFrom(primary: Color(0xff7ED134)),
                     )

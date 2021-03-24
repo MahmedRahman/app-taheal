@@ -1,18 +1,31 @@
+import 'package:eradah/app/modules/activities/model/categoryvedioModel.dart';
+import 'package:eradah/app/modules/activities/model/vedio_model.dart';
+import 'package:eradah/app/modules/activities/provider/activities_provider.dart';
 import 'package:get/get.dart';
 
 class ActivitiesController extends GetxController {
   //TODO: Implement ActivitiesController
-  
-  final count = 0.obs;
-
   @override
-  void onInit() {}
+  void onInit() {
+    // TODO: implement onInit
 
-  @override
-  void onReady() {}
+    super.onInit();
+  }
 
-  @override
-  void onClose() {}
+  Future allCategories() async {
+    
+    Response response = await ActivitiesProvider().allCategories();
 
-  void increment() => count.value++;
+    final vedioListModel = vedioListModelFromJson(response.bodyString);
+
+    return vedioListModel.data;
+  }
+
+
+    Future vedioCategories() async {
+       Response response = await ActivitiesProvider().vedioCategories();
+  final categoryvedioModel = categoryvedioModelFromJson(response.bodyString);
+
+      return categoryvedioModel.data;
+  }
 }

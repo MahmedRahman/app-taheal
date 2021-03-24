@@ -6,6 +6,7 @@ import 'package:eradah/app/data/helper/AppEnumeration.dart';
 import 'package:eradah/app/data/helper/showSnackBar.dart';
 
 import 'package:eradah/app/modules/authiocation/model/StaticDataModel.dart';
+import 'package:eradah/app/modules/authiocation/model/user.dart';
 import 'package:eradah/app/modules/authiocation/provider/authiocation_provider.dart';
 import 'package:eradah/app/routes/app_pages.dart';
 import 'package:flutter/cupertino.dart';
@@ -19,6 +20,8 @@ class AuthiocationController extends GetxController {
 
   var cropperImagePath = ''.obs;
   var cropperImageSize = ''.obs;
+  
+  //var userModel = new User().obs ;
 
   TextEditingController email = TextEditingController();
   TextEditingController password = TextEditingController();
@@ -37,8 +40,12 @@ class AuthiocationController extends GetxController {
   var beforeNineMonth = 0.obs;
   var motorFunction = 0.obs;
 
+
+
   @override
   void onInit() {
+    email.text ="ahmed.bakrigis@gmail.com";
+    password.text ="123123";
     super.onInit();
   }
 
@@ -127,11 +134,10 @@ class AuthiocationController extends GetxController {
     }, onError: (err) {});
   }
 
-  Future createUser() async {
+  createUser() async {
     Get.toNamed(Routes.ProfileCreateView);
 
-    await AuthenticationProvider()
-        .createUser(
+    Response response = await AuthenticationProvider().createUser(
       firstName: firstName.text,
       lastName: lastName.text,
       email: email.text,
@@ -145,10 +151,47 @@ class AuthiocationController extends GetxController {
       diagnostics: diagnostics.value,
       surgeries: surgerySelect.value,
       medicalSplints: medicalSplints.value,
-      beforeNineMonth: beforeNineMonth.value,
-      file: file,
-    )
-        .then((value) {
+      beforeNineMonth: 0,
+      //file: file,
+    );
+
+    if (response.body['success']) {
+      showSnackBar(
+          title: appName,
+          message: 'تم التسجيل بنجاح',
+          snackbarStatus: () {
+            Get.toNamed(Routes.SigninView);
+          });
+    } else {
+      showSnackBar(
+        title: appName,
+        message: response.body['message'].toString(),
+        snackbarStatus: () {
+          Get.toNamed(Routes.SignupView);
+        },
+      );
+    }
+
+    /*
+    .then((value) {
+   showSnackBar(
+          title: appName,
+          message: 'تم التسجيل بنجاح',
+          snackbarStatus: () {
+            Get.toNamed(Routes.SigninView);
+          });
+    },onError: (err){
+      showSnackBar(
+        title: appName,
+        message: err,
+        snackbarStatus: () {
+          Get.toNamed(Routes.SignupView);
+        },
+      );
+    });   
+*/
+/*
+      .then((value) {
       showSnackBar(
           title: appName,
           message: 'تم التسجيل بنجاح',
@@ -163,7 +206,8 @@ class AuthiocationController extends GetxController {
           Get.toNamed(Routes.SignupView);
         },
       );
-    });
+    });  
+    */
   }
 
   signInWithEmailAndPassword() async {
@@ -174,6 +218,15 @@ class AuthiocationController extends GetxController {
     )
         .then((value) {
       print(value);
+      showSnackBar(
+        title: appName,
+        message: 'اهلا بك فى التطبيق',
+        snackbarStatus: () {
+          Get.toNamed(Routes.HOME);
+        },
+      );
+
+
     }, onError: (err) {
       showSnackBar(
         title: appName,

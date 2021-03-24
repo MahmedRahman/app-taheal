@@ -271,9 +271,11 @@ class ProfileKidsView extends GetView<AuthiocationController> {
                                         'طفلي مولود قبل إكمال 37 اسبوع حمل',
                                        // Checkboxdefaultvalue: controller?.beforeNineMonth?.value?? false,
                                     onChanged: (value) {
+                                      /*
                                       print(value);
                                       controller.beforeNineMonth.value =
                                           value;
+                                          */
                                     },
                                   ),
                                 ],

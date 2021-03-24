@@ -5,6 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
 class AuthenticationProvider extends RepostoryProvide {
+
   Future prepareList() async {
     return await repGet('List').then((Response response) {
       if (response.body['success']) {
@@ -17,7 +18,7 @@ class AuthenticationProvider extends RepostoryProvide {
     });
   }
 
-  Future createUser(
+   createUser(
       {@required String firstName,
       @required String lastName,
       @required String email,
@@ -33,7 +34,7 @@ class AuthenticationProvider extends RepostoryProvide {
       String phone = '000000000',
       int beforeNineMonth = 0,
       String image = 'test',
-      File file}) async {
+     }) async {
     final data = FormData({
       'first_name': firstName,
       'last_name': lastName,
@@ -50,22 +51,18 @@ class AuthenticationProvider extends RepostoryProvide {
       'diagnostics': diagnostics,
       'surgeries': surgeries,
       'medical_splints': medicalSplints,
-      'image': MultipartFile(file, filename: 'aa.jpg')
+     // 'image': MultipartFile(file, filename: 'aa.jpg')
       //'image': MultipartFile(file,filename: 'aa.jpg'),
     });
 
-    repPost(
+    Response response = await repPost(
       'register',
       data,
-    ).then((response) {
-      if (response.body['success']) {
-        return response.bodyString;
-      } else {
-        return Future.error(response.body['message'].toString());
-      }
-    }, onError: (err) {
-      print(err);
-    });
+    );
+
+
+return response;
+    
   }
 
   Future signInWithEmailAndPassword({
@@ -77,17 +74,18 @@ class AuthenticationProvider extends RepostoryProvide {
       'password': password,
     });
 
-    return await repPost(
+    Response response = await repPost(
       'login',
       data,
-    ).then((response) {
-      if (response.body['success']) {
-        return response.bodyString;
-      } else {
-        return Future.error(response.body['message'].toString());
-      }
-    }, onError: (err) {
-      Future.error(err);
-    });
+    );
+
+    if (response.body['success']) {
+      return response.bodyString;
+    } else {
+      return Future.error(response.body['message'].toString());
+    }
   }
+
+
+
 }
