@@ -78,19 +78,14 @@ class AuthiocationController extends GetxController {
     file = File(cropperImagePath.value);
   }
 
+  prepareList() async {
 
-
-
-
-
- Future prepareList() async {
     
-    
-   await AuthenticationProvider().prepareList().then((re) {
+   await AuthenticationProvider().prepareList().then((value) {
       print('=======================');
-      print(re);
+      print(value);
 
-      /*
+     
       final staticDataModel = staticDataModelFromJson(value);
       print(staticDataModel.data.elementAt(0).diagnostics);
       //Diagnosis.addAll(staticDataModel.data.elementAt(0).diagnostics) ;
@@ -139,10 +134,10 @@ class AuthiocationController extends GetxController {
       });
 
       Get.toNamed(Routes.IntroView);
-      */
+      
     }, onError: (err) {});
 
-    print('What is your Name');
+  
   }
 
   Future createUser() async {

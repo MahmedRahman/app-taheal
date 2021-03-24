@@ -1,20 +1,20 @@
+import 'dart:async';
 import 'dart:io';
 import 'package:eradah/app/data/repostory.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
 class AuthenticationProvider extends RepostoryProvide {
-  //RepostoryProvide _repostoryProvide = RepostoryProvide();
 
-  Future<Future<String>> prepareList() async {
-    await repGet('List').then((Response response) {
+  Future<String> prepareList() async {
+    return await repGet('List').then((Response response) {
       if (response.body['success']) {
         return response.bodyString;
       } else {
-        return response.body['message'];
+        return response.body['message'].toString();
       }
     }, onError: (err) {
-      return err;
+      return err.toString();
     });
   }
 

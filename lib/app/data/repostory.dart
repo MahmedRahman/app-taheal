@@ -31,7 +31,7 @@ class RepostoryProvide extends GetConnect {
   Future<Response> repGet(url) async {
      print(baes_url + "/" + url);
     Response response = await get(baes_url + "/" + url, headers: header);
-   //print(response);
+   //print(response.bodyString);
     //print(response.hasError);
     switch (response.statusCode) {
       case 200:
