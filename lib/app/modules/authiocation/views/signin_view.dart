@@ -1,4 +1,3 @@
-import 'package:eradah/app/data/helper/AppUtils.dart';
 import 'package:eradah/app/data/helper/AppValidation.dart';
 import 'package:eradah/app/modules/authiocation/controllers/authiocation_controller.dart';
 import 'package:eradah/app/routes/app_pages.dart';
@@ -157,7 +156,8 @@ class SigninView extends GetView<AuthiocationController> {
                             buttonText: 'sigin'.tr,
                             onPressed: () {
                               if (_formKey.currentState.validate()) {
-                                Get.toNamed(Routes.HOME);
+                               // Get.toNamed(Routes.HOME);
+                               controller.signInWithEmailAndPassword();
                               }
                             },
                           ),

@@ -11,17 +11,13 @@ class RepostoryProvide extends GetConnect {
   };
 
   Future<Response> repPost(url, body) async {
+    print(baes_url + "/" + url);
+
     Response response = await post(baes_url + "/" + url, body, headers: header);
 
     switch (response.statusCode) {
       case 200:
         return response;
-        break;
-      case 500:
-        return Future.error('error');
-        break;
-      case 401:
-        return Future.error('error');
         break;
       default:
         return Future.error('error');
@@ -29,24 +25,24 @@ class RepostoryProvide extends GetConnect {
   }
 
   Future<Response> repGet(url) async {
-     print(baes_url + "/" + url);
-    Response response = await get(baes_url + "/" + url, headers: header);
-   //print(response.bodyString);
-    //print(response.hasError);
-    switch (response.statusCode) {
-      case 200:
-        return response;
-        break;
-      case 500:
-        return Future.error('error');
-        break;
-      case 401:
-        return Future.error('error');
-        break;
-      default:
-        return Future.error('error');
-    }
 
-    //return await get(baes_url + "/" + url);
+    print(baes_url + "/" + url);
+
+    return await get(baes_url + "/" + url, headers: header).then((response) {
+
+      switch (response.statusCode) {
+        case 200:
+          return response;
+          break;
+        default:
+          return Future.error('error');
+      }
+
+
+    }, onError: (err) {
+      print(err);
+    });
+
+    //print(response.hasError);
   }
 }

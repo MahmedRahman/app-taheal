@@ -1,5 +1,5 @@
 import 'package:eradah/app/data/helper/AppConstant.dart';
-import 'package:eradah/app/data/helper/AppUtils.dart';
+import 'package:eradah/app/data/helper/showSnackBar.dart';
 import 'package:eradah/app/modules/activities/views/activities_view.dart';
 import 'package:eradah/app/routes/app_pages.dart';
 import 'package:eradah/app/data/component/CustemButton.dart';
@@ -42,7 +42,7 @@ class ActivitesListVideoView extends GetView {
                 child: CustemButton(
                     buttonText: 'حفظ',
                     onPressed: () {
-                      AppUtils().showSnackBar(
+                      showSnackBar(
                         title: appName,
                         message: 'تم اضافة الفيديو الى خطتى',
                         snackbarStatus: () {

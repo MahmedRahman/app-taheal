@@ -1,7 +1,7 @@
 import 'dart:io';
 import 'package:eradah/app/data/helper/AppConstant.dart';
-import 'package:eradah/app/data/helper/AppUtils.dart';
 import 'package:eradah/app/data/helper/AppValidation.dart';
+import 'package:eradah/app/data/helper/showSnackBar.dart';
 import 'package:eradah/app/modules/authiocation/controllers/authiocation_controller.dart';
 import 'package:eradah/app/routes/app_pages.dart';
 import 'package:eradah/app/data/helper/AppEnumeration.dart';
@@ -295,7 +295,7 @@ class ProfileKidsView extends GetView<AuthiocationController> {
                               bool validate = true;
 
                               if (controller.childBirthday.value == '') {
-                                AppUtils().showSnackBar(
+                                showSnackBar(
                                     title: appName,
                                     message: 'برجاء كتابة تاريخ ميلاد الطفل',
                                     snackbarStatus: () {});
@@ -305,7 +305,7 @@ class ProfileKidsView extends GetView<AuthiocationController> {
                               if (controller.diagnostics.value == '' ||
                                   controller.surgerySelect.value == '' ||
                                   controller.medicalSplints.value == '') {
-                                AppUtils().showSnackBar(
+                                showSnackBar(
                                     title: appName,
                                     message:
                                         '. برجاء أستكمال بيانات السجل الطبى للطفل',

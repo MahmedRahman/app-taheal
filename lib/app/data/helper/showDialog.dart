@@ -1,9 +1,8 @@
-import 'package:eradah/app/data/helper/AppTheme.dart';
+ import 'package:eradah/app/data/helper/AppTheme.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class AppUtils {
-  void showDialog(String title, String content, Function onPressed) {
+void showDialog(String title, String content, Function onPressed) {
     Get.defaultDialog(
       title: title,
       titleStyle: TextStyle(
@@ -38,31 +37,3 @@ class AppUtils {
       barrierDismissible: false,
     );
   }
-
-  void showSnackBar({
-    @required String title,
-    @required String message,
-    @required Function snackbarStatus(),
-  }) {
-    Get.snackbar(
-      title,
-      message,
-      snackPosition: SnackPosition.BOTTOM,
-      backgroundColor: KprimaryColor,
-      colorText: Colors.white,
-      overlayBlur: 4,
-      borderWidth: 2,
-      margin: EdgeInsets.all(10),
-      borderColor: KprimaryColor,
-      snackbarStatus: (value) {
-        if (value == SnackbarStatus.CLOSED) {
-          snackbarStatus();
-        }
-        
-        //onstatusBarClosed(value);
-      },
-    );
-  }
-}
-
-class KAccentColor {}

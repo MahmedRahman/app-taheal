@@ -2,8 +2,9 @@ import 'dart:io';
 
 import 'package:eradah/app/data/helper/AppConstant.dart';
 import 'package:eradah/app/data/helper/AppEnumeration.dart';
-import 'package:eradah/app/data/helper/AppUtils.dart';
-import 'package:eradah/app/data/repostory.dart';
+
+import 'package:eradah/app/data/helper/showSnackBar.dart';
+
 import 'package:eradah/app/modules/authiocation/model/StaticDataModel.dart';
 import 'package:eradah/app/modules/authiocation/provider/authiocation_provider.dart';
 import 'package:eradah/app/routes/app_pages.dart';
@@ -27,6 +28,7 @@ class AuthiocationController extends GetxController {
   TextEditingController phone = TextEditingController();
   TextEditingController childName = TextEditingController();
   File file;
+
   var childGender = 0.obs;
   var childBirthday = ''.obs;
   var diagnostics = 0.obs;
@@ -79,25 +81,16 @@ class AuthiocationController extends GetxController {
   }
 
   prepareList() async {
-
-    
-   await AuthenticationProvider().prepareList().then((value) {
-      print('=======================');
-      print(value);
-
-     
+    await AuthenticationProvider().prepareList().then((value) {
       final staticDataModel = staticDataModelFromJson(value);
       print(staticDataModel.data.elementAt(0).diagnostics);
-      //Diagnosis.addAll(staticDataModel.data.elementAt(0).diagnostics) ;
       print('Diagnosis List');
-
       staticDataModel.data.elementAt(0).diagnostics.forEach((element) {
         Diagnosis.add({
           "id": "" + element.id.toString() + "",
           "title": "" + element.title.toString() + "",
         });
       });
-
       print('surgery List');
       staticDataModel.data.elementAt(0).surgeries.forEach((element) {
         surgery.add({
@@ -105,7 +98,6 @@ class AuthiocationController extends GetxController {
           "title": "" + element.title.toString() + "",
         });
       });
-
       print('splints List');
       staticDataModel.data.elementAt(0).medicalSplints.forEach((element) {
         splints.add({
@@ -113,9 +105,7 @@ class AuthiocationController extends GetxController {
           "title": "" + element.title.toString() + "",
         });
       });
-
       print('ListRlationShip List');
-
       staticDataModel.data.elementAt(0).listRlationShips.forEach((element) {
         ListRlationShip.add({
           "id": "" + element.id.toString() + "",
@@ -134,10 +124,7 @@ class AuthiocationController extends GetxController {
       });
 
       Get.toNamed(Routes.IntroView);
-      
     }, onError: (err) {});
-
-  
   }
 
   Future createUser() async {
@@ -162,19 +149,36 @@ class AuthiocationController extends GetxController {
       file: file,
     )
         .then((value) {
-      AppUtils().showSnackBar(
+      showSnackBar(
           title: appName,
           message: 'تم التسجيل بنجاح',
           snackbarStatus: () {
             Get.toNamed(Routes.SigninView);
           });
     }, onError: (err) {
-      AppUtils().showSnackBar(
+     showSnackBar(
         title: appName,
         message: err,
         snackbarStatus: () {
           Get.toNamed(Routes.SignupView);
         },
+      );
+    });
+  }
+
+  signInWithEmailAndPassword() async {
+    await AuthenticationProvider()
+        .signInWithEmailAndPassword(
+      email: email.text,
+      password: password.text,
+    )
+        .then((value) {
+      print(value);
+    }, onError: (err) {
+      showSnackBar(
+        title: appName,
+        message: err,
+        snackbarStatus: () {},
       );
     });
   }

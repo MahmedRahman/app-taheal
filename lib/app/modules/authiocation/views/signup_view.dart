@@ -1,6 +1,6 @@
 import 'package:eradah/app/data/helper/AppConstant.dart';
-import 'package:eradah/app/data/helper/AppUtils.dart';
 import 'package:eradah/app/data/helper/AppValidation.dart';
+import 'package:eradah/app/data/helper/showSnackBar.dart';
 import 'package:eradah/app/modules/authiocation/controllers/authiocation_controller.dart';
 import 'package:eradah/app/modules/authiocation/views/signin_view.dart';
 import 'package:eradah/app/routes/app_pages.dart';
@@ -147,7 +147,7 @@ class SignupView extends GetView<AuthiocationController> {
                         if (confirmStatus) {
                           Get.toNamed(Routes.ProfileUserView);
                         } else {
-                          AppUtils().showSnackBar(
+                        showSnackBar(
                               title: appName,
                               message: 'يجب الموافقة على سياسية الاستخدام',
                               snackbarStatus: () {

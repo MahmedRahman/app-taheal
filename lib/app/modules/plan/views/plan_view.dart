@@ -1,6 +1,6 @@
 import 'package:eradah/app/data/helper/AppConstant.dart';
 import 'package:eradah/app/data/helper/AppTheme.dart';
-import 'package:eradah/app/data/helper/AppUtils.dart';
+import 'package:eradah/app/data/helper/showSnackBar.dart';
 import 'package:eradah/app/routes/app_pages.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -185,7 +185,7 @@ class listVideo extends StatelessWidget {
                 child: ElevatedButton.icon(
                   style: ElevatedButton.styleFrom(primary: KprimaryColor),
                   onPressed: () {
-                    AppUtils().showSnackBar(
+                   showSnackBar(
                       title: appName,
                       message:
                           'تم الانتهاء من عمل النشاط اللزم وسيتنقل الى الانشطة السابقة',
@@ -274,7 +274,7 @@ class listVideo extends StatelessWidget {
                                       InkWell(
                                         onTap: () {
                                           Get.back();
-                                          AppUtils().showSnackBar(
+                                          showSnackBar(
                                             title: appName,
                                             message: 'تم تقيم الفيديو',
                                             snackbarStatus: () {},
@@ -296,7 +296,7 @@ class listVideo extends StatelessWidget {
                                       InkWell(
                                         onTap: () {
                                           Get.back();
-                                          AppUtils().showSnackBar(
+                                          showSnackBar(
                                             title: appName,
                                             message: 'تم تقيم الفيديو',
                                             snackbarStatus: () {},

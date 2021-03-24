@@ -5,16 +5,15 @@ import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
 class AuthenticationProvider extends RepostoryProvide {
-
-  Future<String> prepareList() async {
+  Future prepareList() async {
     return await repGet('List').then((Response response) {
       if (response.body['success']) {
         return response.bodyString;
       } else {
-        return response.body['message'].toString();
+        return Future.error(response.body['message'].toString());
       }
     }, onError: (err) {
-      return err.toString();
+      return Future.error(err);
     });
   }
 
@@ -56,14 +55,39 @@ class AuthenticationProvider extends RepostoryProvide {
     });
 
     repPost(
-      '$baes_url/register',
+      'register',
       data,
     ).then((response) {
       if (response.body['success']) {
         return response.bodyString;
       } else {
-        return Future.error(response.body['message']);
+        return Future.error(response.body['message'].toString());
       }
+    }, onError: (err) {
+      print(err);
+    });
+  }
+
+  Future signInWithEmailAndPassword({
+    @required String email,
+    @required String password,
+  }) async {
+    final data = FormData({
+      'email': email,
+      'password': password,
+    });
+
+    return await repPost(
+      'login',
+      data,
+    ).then((response) {
+      if (response.body['success']) {
+        return response.bodyString;
+      } else {
+        return Future.error(response.body['message'].toString());
+      }
+    }, onError: (err) {
+      Future.error(err);
     });
   }
 }
