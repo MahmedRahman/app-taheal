@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="70.207" height="64.08" viewBox="0 0 70.207 64.08">
+  <defs>
+    <filter id="Path_418" x="0" y="3.323" width="70.207" height="60.757" filterUnits="userSpaceOnUse">
+      <feOffset dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feFlood flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+  </defs>
+  <g id="calendar_2_" data-name="calendar (2)" transform="translate(27.488 -12.168) rotate(24)">
+    <g transform="matrix(0.91, -0.41, 0.41, 0.91, -20.16, 22.3)" filter="url(#Path_418)">
+      <path id="Path_418-2" data-name="Path 418" d="M1.75,44.384H47.036V69.207a1.819,1.819,0,0,1-1.819,1.819H3.569A1.819,1.819,0,0,1,1.75,69.207Z" transform="translate(36.29 -31.94) rotate(24)" fill="#e1e4fb"/>
+    </g>
+    <path id="Path_419" data-name="Path 419" d="M3.932,25.257H44.853a2.182,2.182,0,0,1,2.182,2.182v4.775H1.75V27.439a2.182,2.182,0,0,1,2.182-2.182Z" transform="translate(0 -9.469)" fill="#0d70b2"/>
+    <g id="Group_76" data-name="Group 76" transform="translate(6.615 10.374)">
+      <path id="Path_420" data-name="Path 420" d="M16.58,10.374h1.467A1.455,1.455,0,0,1,19.5,11.829v3.959H15.125V11.829A1.455,1.455,0,0,1,16.58,10.374Z" transform="translate(-15.125 -10.374)" fill="#1689fc"/>
+      <path id="Path_421" data-name="Path 421" d="M45.155,10.374h1.467a1.455,1.455,0,0,1,1.455,1.455v3.959H43.7V11.829A1.455,1.455,0,0,1,45.155,10.374Z" transform="translate(-33.306 -10.374)" fill="#1689fc"/>
+      <path id="Path_422" data-name="Path 422" d="M73.724,10.374H75.19a1.455,1.455,0,0,1,1.455,1.455v3.959H72.269V11.829A1.455,1.455,0,0,1,73.724,10.374Z" transform="translate(-51.483 -10.374)" fill="#1689fc"/>
+      <path id="Path_423" data-name="Path 423" d="M102.3,10.374h1.467a1.455,1.455,0,0,1,1.455,1.455v3.959h-4.377V11.829A1.455,1.455,0,0,1,102.3,10.374Z" transform="translate(-69.662 -10.374)" fill="#1689fc"/>
+    </g>
+    <g id="Group_77" data-name="Group 77" transform="translate(5.387 26.383)">
+      <rect id="Rectangle_52" data-name="Rectangle 52" width="5.36" height="4.339" rx="2" transform="translate(0 0)" fill="#c5c9f7"/>
+      <rect id="Rectangle_53" data-name="Rectangle 53" width="5.36" height="4.339" rx="2" transform="translate(10.884 0)" fill="#c5c9f7"/>
+      <rect id="Rectangle_54" data-name="Rectangle 54" width="5.36" height="4.339" rx="2" transform="translate(21.767 0)" fill="#c5c9f7"/>
+      <rect id="Rectangle_55" data-name="Rectangle 55" width="5.36" height="4.339" rx="2" transform="translate(32.651 0)" fill="#c5c9f7"/>
+      <rect id="Rectangle_56" data-name="Rectangle 56" width="5.36" height="4.339" rx="2" transform="translate(0 7.513)" fill="#c5c9f7"/>
+      <rect id="Rectangle_57" data-name="Rectangle 57" width="5.36" height="4.339" rx="2" transform="translate(10.884 7.513)" fill="#c5c9f7"/>
+      <rect id="Rectangle_58" data-name="Rectangle 58" width="5.36" height="4.339" rx="2" transform="translate(21.767 7.513)" fill="#c5c9f7"/>
+      <rect id="Rectangle_59" data-name="Rectangle 59" width="5.36" height="4.339" rx="2" transform="translate(32.651 7.513)" fill="#c5c9f7"/>
+      <rect id="Rectangle_60" data-name="Rectangle 60" width="5.36" height="4.339" rx="2" transform="translate(0 15.027)" fill="#c5c9f7"/>
+      <rect id="Rectangle_61" data-name="Rectangle 61" width="5.36" height="4.339" rx="2" transform="translate(10.884 15.027)" fill="#c5c9f7"/>
+    </g>
+    <path id="Path_424" data-name="Path 424" d="M72.481,99.94a.636.636,0,0,1-.5-.241l-2-2.524a.636.636,0,1,1,1-.79l1.491,1.883L75.126,94.8a.637.637,0,1,1,1.012.773l-3.15,4.122a.638.638,0,0,1-.5.25Z" transform="translate(-43.326 -53.555)" fill="#00ddc1"/>
+    <path id="Path_425" data-name="Path 425" d="M102.4,99.94a.637.637,0,0,1-.5-.241l-2-2.524a.636.636,0,1,1,1-.79l1.491,1.883,2.653-3.472a.637.637,0,1,1,1.012.773l-3.15,4.122a.638.638,0,0,1-.5.25Z" transform="translate(-62.363 -53.555)" fill="#00ddc1"/>
+  </g>
+</svg>
