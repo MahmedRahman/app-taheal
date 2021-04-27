@@ -1,7 +1,8 @@
 import 'package:eradah/app/modules/acount/views/acount_view.dart';
 import 'package:eradah/app/modules/activities/views/activities_view.dart';
+import 'package:eradah/app/modules/levels/list/views/levels_list_view.dart';
 import 'package:eradah/app/modules/levels/views/levels_view.dart';
-import 'package:eradah/app/modules/plan/views/plan_view.dart';
+import 'package:eradah/app/modules/plan/list/views/plan_list_view.dart';
 import 'package:eradah/app/data/helper/AppTheme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -42,7 +43,7 @@ class HomeView extends GetView<HomeController> {
               // Respond to item press.
             },
             items: [
-            BottomNavigationBarItem(
+              BottomNavigationBarItem(
                 label: 'خطتى',
                 icon: SizedBox(
                   width: 32,
@@ -75,7 +76,7 @@ class HomeView extends GetView<HomeController> {
                   ),
                 ),
               ),
-                BottomNavigationBarItem(
+              BottomNavigationBarItem(
                 label: 'حسابى',
                 icon: SizedBox(
                   width: 32,
@@ -92,13 +93,10 @@ class HomeView extends GetView<HomeController> {
       }),
       body: Obx(() {
         return IndexedStack(index: selectindex.value, children: [
-            PlanView(),
-           ActivitiesView(),
-
-     
-          LevelsView(),
-         
-             AcountView(),
+          PlanListView(),
+          ActivitiesView(),
+          LevelsListView(),
+          AcountView(),
         ]);
       }),
     );

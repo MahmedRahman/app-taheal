@@ -34,7 +34,6 @@ class CategoryView extends GetView<CategoryController> {
                   child: Card(
                     child: SvgPicture.asset(
                       CategoryList.elementAt(index).toString(),
-                 
                     ),
                   ),
                 ),

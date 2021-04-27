@@ -17,10 +17,17 @@ abstract class Routes {
   static const CATEGORY = '/category';
   static const CategoryDetailesView = '/CategoryDetailesView';
   static const ForgetpasswordView = '/ForgetpasswordView';
-    static const SignupView = '/SignupView';
-    static const ProfilekidsMotorView = '/ProfilekidsMotorView';
-      static const PlanVideoDetailesView = '/PlanVideoDetailesView';
-      static const ActivitesListVideoView = '/ActivitesListVideoView';
-      
-  
+  static const SignupView = '/SignupView';
+  static const ProfilekidsMotorView = '/ProfilekidsMotorView';
+  static const PlanVideoDetailesView = '/PlanVideoDetailesView';
+  static const ActivitesListVideoView = '/ActivitesListVideoView';
+
+  static const SETTING = '/setting';
+  static const NOTIFACTION = '/notifaction';
+  static const LevelsDetaileView = '/LevelsDetaileView';
+  static const SUBSCRIPTION = '/subscription';
+  static const PLAN_LIST = '/plan/list';
+  static const PLAN_DETAIL = '/plan/detail';
+  static const LEVELS_LIST = '/levels/list';
+  static const LEVELS_DETAIL = '/levels/detail';
 }

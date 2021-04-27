@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
 
-class PlanController extends GetxController {
-  //TODO: Implement PlanController
+class SettingController extends GetxController {
+  //TODO: Implement SettingController
   
   final count = 0.obs;
 

@@ -1,5 +1,7 @@
 import 'dart:io';
 
+import 'package:eradah/app/api/response_model.dart';
+import 'package:eradah/app/api/web_serives.dart';
 import 'package:eradah/app/data/helper/AppConstant.dart';
 import 'package:eradah/app/data/helper/AppEnumeration.dart';
 
@@ -7,8 +9,9 @@ import 'package:eradah/app/data/helper/showSnackBar.dart';
 
 import 'package:eradah/app/modules/authiocation/model/StaticDataModel.dart';
 import 'package:eradah/app/modules/authiocation/model/user.dart';
-import 'package:eradah/app/modules/authiocation/provider/authiocation_provider.dart';
+import 'package:eradah/app/modules/authiocation/model/userlogModel.dart';
 import 'package:eradah/app/routes/app_pages.dart';
+import 'package:eradah/auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:image_cropper/image_cropper.dart';
@@ -20,7 +23,7 @@ class AuthiocationController extends GetxController {
 
   var cropperImagePath = ''.obs;
   var cropperImageSize = ''.obs;
-  
+
   //var userModel = new User().obs ;
 
   TextEditingController email = TextEditingController();
@@ -40,12 +43,10 @@ class AuthiocationController extends GetxController {
   var beforeNineMonth = 0.obs;
   var motorFunction = 0.obs;
 
-
-
   @override
   void onInit() {
-    email.text ="ahmed.bakrigis@gmail.com";
-    password.text ="123123";
+    email.text = "atpfree@gmail.com";
+    password.text = "123123";
     super.onInit();
   }
 
@@ -88,39 +89,38 @@ class AuthiocationController extends GetxController {
   }
 
   prepareList() async {
-    await AuthenticationProvider().prepareList().then((value) {
-      final staticDataModel = staticDataModelFromJson(value);
-      print(staticDataModel.data.elementAt(0).diagnostics);
-      print('Diagnosis List');
+    ResponsModel responsModel = await WebSerives().prepareList();
+
+    if (responsModel.success) {
+      Response response = responsModel.data;
+      final staticDataModel = staticDataModelFromJson(response.bodyString);
       staticDataModel.data.elementAt(0).diagnostics.forEach((element) {
         Diagnosis.add({
           "id": "" + element.id.toString() + "",
           "title": "" + element.title.toString() + "",
         });
       });
-      print('surgery List');
+
       staticDataModel.data.elementAt(0).surgeries.forEach((element) {
         surgery.add({
           "id": "" + element.id.toString() + "",
           "title": "" + element.title.toString() + "",
         });
       });
-      print('splints List');
+
       staticDataModel.data.elementAt(0).medicalSplints.forEach((element) {
         splints.add({
           "id": "" + element.id.toString() + "",
           "title": "" + element.title.toString() + "",
         });
       });
-      print('ListRlationShip List');
+
       staticDataModel.data.elementAt(0).listRlationShips.forEach((element) {
         ListRlationShip.add({
           "id": "" + element.id.toString() + "",
           "title": "" + element.title.toString() + "",
         });
       });
-
-      print('MotorFunctions List');
 
       staticDataModel.data.elementAt(0).motorFunctions.forEach((element) {
         MotorFunctions.add({
@@ -130,14 +130,18 @@ class AuthiocationController extends GetxController {
         });
       });
 
-      Get.toNamed(Routes.IntroView);
-    }, onError: (err) {});
+      if (Get.find<UserAuth>().getUserToken() == null) {
+        Get.toNamed(Routes.IntroView);
+      } else {
+        Get.toNamed(Routes.HOME);
+      }
+    }
   }
 
   createUser() async {
     Get.toNamed(Routes.ProfileCreateView);
 
-    Response response = await AuthenticationProvider().createUser(
+    ResponsModel responsModel = await WebSerives().createUser(
       firstName: firstName.text,
       lastName: lastName.text,
       email: email.text,
@@ -155,84 +159,56 @@ class AuthiocationController extends GetxController {
       //file: file,
     );
 
-    if (response.body['success']) {
-      showSnackBar(
+    if (responsModel.success) {
+      Response response = responsModel.data;
+      if (response.body['success']) {
+        showSnackBar(
+            title: appName,
+            message: 'تم التسجيل بنجاح',
+            snackbarStatus: () {
+              Get.toNamed(Routes.SigninView);
+            });
+      } else {
+        showSnackBar(
           title: appName,
-          message: 'تم التسجيل بنجاح',
+          message: response.body['message'].toString(),
           snackbarStatus: () {
-            Get.toNamed(Routes.SigninView);
-          });
-    } else {
-      showSnackBar(
-        title: appName,
-        message: response.body['message'].toString(),
-        snackbarStatus: () {
-          Get.toNamed(Routes.SignupView);
-        },
-      );
+            Get.toNamed(Routes.SignupView);
+          },
+        );
+      }
     }
-
-    /*
-    .then((value) {
-   showSnackBar(
-          title: appName,
-          message: 'تم التسجيل بنجاح',
-          snackbarStatus: () {
-            Get.toNamed(Routes.SigninView);
-          });
-    },onError: (err){
-      showSnackBar(
-        title: appName,
-        message: err,
-        snackbarStatus: () {
-          Get.toNamed(Routes.SignupView);
-        },
-      );
-    });   
-*/
-/*
-      .then((value) {
-      showSnackBar(
-          title: appName,
-          message: 'تم التسجيل بنجاح',
-          snackbarStatus: () {
-            Get.toNamed(Routes.SigninView);
-          });
-    }, onError: (err) {
-     showSnackBar(
-        title: appName,
-        message: err,
-        snackbarStatus: () {
-          Get.toNamed(Routes.SignupView);
-        },
-      );
-    });  
-    */
   }
 
   signInWithEmailAndPassword() async {
-    await AuthenticationProvider()
-        .signInWithEmailAndPassword(
+    ResponsModel responsModel = await WebSerives().signInWithEmailAndPassword(
       email: email.text,
       password: password.text,
-    )
-        .then((value) {
-      print(value);
+    );
+
+    if (responsModel.success) {
+      Response response = responsModel.data;
+      final userlogModel = userlogModelFromJson(response.bodyString);
+
+      var firstName = userlogModel.data.elementAt(0).firstName.toString();
+      var email = userlogModel.data.elementAt(0).email.toString();
+      var accessToken = userlogModel.data.elementAt(0).accessToken.toString();
+
+print('xxxxxxxxxxxxxxxxxxxxxxxx');
+print(accessToken);
+print('xxxxxxxxxxxxxxxxxxxxxxxx');
+
+      Get.find<UserAuth>().setUserToken(accessToken);
+      Get.find<UserAuth>().setUserEmail(email);
+      Get.find<UserAuth>().setUserName(firstName);
+
       showSnackBar(
         title: appName,
-        message: 'اهلا بك فى التطبيق',
+        message: '$firstName اهلا بك فى التطبيق',
         snackbarStatus: () {
           Get.toNamed(Routes.HOME);
         },
       );
-
-
-    }, onError: (err) {
-      showSnackBar(
-        title: appName,
-        message: err,
-        snackbarStatus: () {},
-      );
-    });
+    }
   }
 }

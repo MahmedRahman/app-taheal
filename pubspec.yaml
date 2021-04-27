@@ -21,19 +21,22 @@ environment:
   sdk: ">=2.7.0 <3.0.0"
 
 dependencies:
-  get: 3.26.0
+  get: ^4.0.0-nullsafety.2
   flutter:
     sdk: flutter
 
   cupertino_icons: ^1.0.0
   flutter_svg: ^0.19.3
-  lottie: ^1.0.1
+  lottie: ^0.7.0
   intl: ^0.17.0
   image_picker: ^0.7.3
-  loading_indicator: ^1.2.0
   image_cropper: ^1.4.0
+  loading_indicator: ^1.2.0
+  cached_network_image: ^2.3.1
   flutter_image_compress: ^0.7.0
- 
+  get_storage: ^2.0.1
+  flutter_html: ^0.8.2
+  video_player: ^2.1.1
 
 
 

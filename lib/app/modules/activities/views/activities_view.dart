@@ -48,7 +48,7 @@ ActivitiesController controller = Get.put(ActivitiesController());
                             child: Center(
                               child: ListTile(
                                   onTap: () {
-                                    Get.toNamed(Routes.ActivitesListVideoView);
+                                    Get.toNamed(Routes.ActivitesListVideoView ,arguments: data.elementAt(index).id.toString());
                                   },
                                   title: Text(
                                     data.elementAt(index).title,

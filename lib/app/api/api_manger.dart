@@ -1,0 +1,209 @@
+import 'dart:convert';
+
+import 'package:eradah/app/api/response_model.dart';
+import 'package:eradah/app/routes/app_pages.dart';
+import 'package:eradah/auth.dart';
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_connect/connect.dart';
+
+String baes_url = 'https://matrix-clouds.com/erada_kids/public/api/';
+String api_key = 'mwDA9w';
+String Language = 'ar';
+
+class APIManger extends GetConnect {
+  final header = {
+    'x-api-key': api_key,
+    'Content-Language': Language,
+    'Authorization': 'Bearer ',
+    'Content-type': 'application/json',
+    'Accept': 'application/json'
+  };
+
+  void login() {
+    String tokan = Get.find<UserAuth>().getUserToken();
+
+    print('read login');
+
+    print(tokan);
+
+    print('end read login');
+
+   // tokan =
+     //   "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiZjIyNmNhZGZiOWI4MGQ1MzkwYTJlYmU5MTY4MmI3ZDg0MDQxZTM3MDgzNzc2NzBhMGY2MmZjNWIyMDE5YzhlN2U5YjBkZmZiNmNmNGNiZWYiLCJpYXQiOjE2MTkzNTY2NzUsIm5iZiI6MTYxOTM1NjY3NSwiZXhwIjoxNjUwODkyNjc1LCJzdWIiOiIyIiwic2NvcGVzIjpbXX0.IGelRm_nBt9a1kdEYKCOSUZCK_de8m3qn4jYtMj0CXpgF4E91IPN78yYPyRNGo2N5c4xVE5VVJonK9l1qHcFuUeT9y9ZIQzlX8rd9ay_oE4HzMjGYM82-2yvJDJem4yFkjR38foiPBizv90NQhqvY-JPfOGwSe1wkeW8evGfr4xrYnmeYRVlVqAdUWr78OADRGgkSOuTf3ML9XTEuNNzjRxwNRr-VALvLHZVaRvncmTbVt1EO9wY-ebwRMV2Z6g6nNGR0VEpktdSb5yYfm66-OZn27K5ycHAAWXzp_9j9rM5Xxuo2XtKeJ_0nk82baIaNhhy5w6GCM3RReMd0irG15qcmxgbaUSlWR-pt-KJkRoWgf7JG-a7ucvbmmPLkB5M-MUxy6e6B2F_YFsdGGehSGhf16LFpxMLDpoDFmcJWV96SuyqvRJn6Fc9_ve5HAxRQgpYfqaPC_hBh-AdjWtqEBkuuVWrBi3elHnKDG8Lh_SAvvbCCmGttOx0M66KvhRgJpf0xreIlfDIkTKUPiWeiNQI0ZattWy_bVzom0zrWcaxZ-8-95feRY6ixFfPNDnyVnuv_FwDp4Y-6Ps4p1nEiUN_lqC6kfCEmTuD7ewOKeUyvi0rmMsLRdwLXa2gR8LQXQNcLcvDCnCgODlR95DwwiYQj1uaG7niGgItZM0t-jE";
+
+    if (tokan != null) {
+      header.update(
+        'Authorization',
+        (value) {
+          return 'Bearer ' + tokan;
+        },
+      );
+    }
+  }
+
+  Future<ResponsModel> repPost(url, body) async {
+    print("Api Request " + baes_url + url);
+    login();
+
+    Response response = await post(baes_url + url, body, headers: header);
+    print("Api Request " + baes_url + url + response.statusCode.toString());
+    try {
+      switch (response.statusCode) {
+        case 200:
+          return ResponsModel(
+            code: response.statusCode,
+            success: true,
+            data: response,
+          );
+          break;
+
+        case 401:
+          Get.toNamed(Routes.SigninView);
+
+          return ResponsModel(
+            code: response.statusCode,
+            success: false,
+          );
+
+          break;
+
+        default:
+          Get.to(ErrorView(
+            api_url: url.toString(),
+            api_body: body.toString(),
+            api_header: header.toString(),
+            api_status_code: response.statusCode.toString(),
+          ));
+          return ResponsModel(
+            code: response.statusCode,
+            success: false,
+          );
+      }
+    } catch (e) {
+      Get.to(ErrorView(
+        api_url: response.headers.toString(),
+        api_body: e.toString(),
+        api_header: '',
+        api_status_code: e.hashCode.toString(),
+      ));
+      return ResponsModel(
+        code: e.hashCode,
+        success: false,
+      );
+    }
+  }
+
+  Future<ResponsModel> repGet(url) async {
+    print("Api Request " + baes_url + url);
+    login();
+    Response response = await get(baes_url + url, headers: header);
+
+    print("Api Request " +
+        baes_url +
+        url +
+        " Api Request:: " +
+        response.statusCode.toString());
+
+    try {
+      switch (response.statusCode) {
+        case 200:
+          return ResponsModel(
+            code: response.statusCode,
+            success: true,
+            data: response,
+          );
+          break;
+
+        case 401:
+          Get.toNamed(Routes.SigninView);
+
+          return ResponsModel(
+            code: response.statusCode,
+            success: false,
+          );
+
+          break;
+
+        default:
+          Get.to(ErrorView(
+            api_url: url.toString(),
+            api_body: '',
+            api_header: header.toString(),
+            api_status_code: response.statusCode.toString(),
+          ));
+          return ResponsModel(
+            code: response.statusCode,
+            success: false,
+          );
+      }
+    } catch (e) {
+      Get.to(ErrorView(
+        api_url: response.headers.toString(),
+        api_body: e.toString(),
+        api_header: '',
+        api_status_code: e.hashCode.toString(),
+      ));
+      return ResponsModel(
+        code: e.hashCode,
+        success: false,
+      );
+    }
+  }
+}
+
+class ErrorView extends GetView {
+  ErrorView({
+    this.api_url,
+    this.api_header,
+    this.api_body,
+    this.api_status_code,
+  });
+
+  final String api_url;
+  final String api_header;
+  final String api_body;
+  final String api_status_code;
+
+  @override
+  Widget build(BuildContext context) {
+    return WillPopScope(
+      onWillPop: () {},
+      child: Scaffold(
+        body: ListView(
+          children: [
+            SizedBox(
+              height: 10,
+            ),
+            // Lottie.asset('assets/error_api.json'),
+            ListTile(
+              title: Text('API Url'),
+              subtitle: Text(api_url),
+            ),
+            ListTile(
+              title: Text('API Header'),
+              subtitle: Text(api_header.toString()),
+            ),
+            ListTile(
+              title: Text('API Body'),
+              subtitle: Text(api_body.toString()),
+            ),
+            ListTile(
+              title: Text('API Status Code'),
+              subtitle: Text(api_status_code),
+            ),
+            TextButton(
+              onPressed: () {
+                Get.back();
+              },
+              child: Text(
+                'أعادة المحاولة',
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+              ),
+            )
+          ],
+        ),
+      ),
+    );
+  }
+}
