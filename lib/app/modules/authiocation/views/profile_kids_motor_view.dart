@@ -1,3 +1,4 @@
+import 'package:eradah/app/data/component/CustomImageCached.dart';
 import 'package:eradah/app/data/helper/AppEnumeration.dart';
 import 'package:eradah/app/modules/authiocation/controllers/authiocation_controller.dart';
 import 'package:eradah/app/modules/authiocation/views/signin_view.dart';
@@ -48,7 +49,12 @@ class ProfilekidsMotorView extends GetView<AuthiocationController> {
                       crossAxisCount: 3,
                       // Generate 100 widgets that display their index in the List.
                       children: List.generate(MotorFunctions.length, (index) {
-                        controller.motorFunction.value = int.parse(MotorFunctions.first['id']) ;
+
+/*
+                        if(index==1){
+controller.motorFunction.value = int.parse(MotorFunctions.first['id']) ;
+                        }
+                        */
                         return InkWell(
                           onTap: () {
                             print(MotorFunctions.elementAt(index)['id'].toString());
@@ -61,8 +67,7 @@ class ProfilekidsMotorView extends GetView<AuthiocationController> {
                                 : Colors.white,
                             child: Padding(
                               padding: const EdgeInsets.all(25),
-                              child: Image.network(
-                                  MotorFunctions.elementAt(index)['image']
+                              child:CustomImageCached(imageUrl: MotorFunctions.elementAt(index)['image']
                                       .toString()),
                             ),
                           ),

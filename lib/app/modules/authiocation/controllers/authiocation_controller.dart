@@ -41,7 +41,7 @@ class AuthiocationController extends GetxController {
   var surgerySelect = 0.obs;
   var medicalSplints = 0.obs;
   var beforeNineMonth = 0.obs;
-  var motorFunction = 0.obs;
+  var motorFunction = 1.obs;
 
   @override
   void onInit() {

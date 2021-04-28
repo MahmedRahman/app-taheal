@@ -76,17 +76,30 @@ class LevelsDetailView extends GetView<LevelsDetailController> {
                                         SizedBox(
                                           height: 10,
                                         ),
-                                       question.complate == "1"
-                                        ? SizedBox.shrink() : SizedBox(
-                                          width: Get.width,
-                                          child: CustemButton(
-                                            buttonText: 'اكتمل؟',
-                                            onPressed: () {
-                                              controller
-                                                  .setQestion(question.id);
-                                            },
-                                          ),
-                                        ) 
+                                        SizedBox(
+                                            width: Get.width,
+                                            child: ElevatedButton(
+                                              style: ElevatedButton.styleFrom(
+                                                primary: question.complate == "1"
+                                                    ? Colors.grey :KprimaryColor,
+                                              ),
+                                              onPressed: () {
+                                                question.complate == "1"
+                                                    ? null
+                                                    : FocusScope.of(context)
+                                                        .unfocus();
+                                                controller
+                                                    .setQestion(question.id);
+                                              },
+                                              child: Text(
+                                                question.complate == "1"
+                                                    ? 'مكتمل'
+                                                    : 'اكتمل؟',
+                                                style: TextStyle(
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                              ),
+                                            ))
                                       ],
                                     ),
                                   ),
