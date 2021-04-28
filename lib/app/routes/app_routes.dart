@@ -11,19 +11,16 @@ abstract class Routes {
   static const ProfileKidsView = '/ProfileKidsView';
   static const ProfileCreateView = '/ProfileCreateView';
   static const ACTIVITIES = '/activities';
-  static const PLAN = '/plan';
-  static const LEVELS = '/levels';
+
   static const ACOUNT = '/acount';
-  static const CATEGORY = '/category';
-  static const CategoryDetailesView = '/CategoryDetailesView';
+
   static const ForgetpasswordView = '/ForgetpasswordView';
   static const SignupView = '/SignupView';
   static const ProfilekidsMotorView = '/ProfilekidsMotorView';
   static const PlanVideoDetailesView = '/PlanVideoDetailesView';
   static const ActivitesListVideoView = '/ActivitesListVideoView';
 
-  static const SETTING = '/setting';
-  static const NOTIFACTION = '/notifaction';
+
   static const LevelsDetaileView = '/LevelsDetaileView';
   static const SUBSCRIPTION = '/subscription';
   static const PLAN_LIST = '/plan/list';

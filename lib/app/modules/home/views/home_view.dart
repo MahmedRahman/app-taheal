@@ -1,7 +1,6 @@
 import 'package:eradah/app/modules/acount/views/acount_view.dart';
 import 'package:eradah/app/modules/activities/views/activities_view.dart';
 import 'package:eradah/app/modules/levels/list/views/levels_list_view.dart';
-import 'package:eradah/app/modules/levels/views/levels_view.dart';
 import 'package:eradah/app/modules/plan/list/views/plan_list_view.dart';
 import 'package:eradah/app/data/helper/AppTheme.dart';
 import 'package:flutter/material.dart';
@@ -50,7 +49,7 @@ class HomeView extends GetView<HomeController> {
                   height: 32,
                   child: SvgPicture.asset(
                     'asset/menu/plan.svg',
-                    color: selectindex.value == 2 ? KprimaryColor : KscandColor,
+                    color: selectindex.value == 0 ? KprimaryColor : KscandColor,
                   ),
                 ),
               ),
@@ -61,7 +60,7 @@ class HomeView extends GetView<HomeController> {
                   height: 32,
                   child: SvgPicture.asset(
                     'asset/menu/Activities.svg',
-                    color: selectindex.value == 3 ? KprimaryColor : KscandColor,
+                    color: selectindex.value == 1 ? KprimaryColor : KscandColor,
                   ),
                 ),
               ),
@@ -72,7 +71,7 @@ class HomeView extends GetView<HomeController> {
                   height: 32,
                   child: SvgPicture.asset(
                     'asset/menu/levels.svg',
-                    color: selectindex.value == 1 ? KprimaryColor : KscandColor,
+                    color: selectindex.value == 2 ? KprimaryColor : KscandColor,
                   ),
                 ),
               ),
@@ -83,7 +82,7 @@ class HomeView extends GetView<HomeController> {
                   height: 32,
                   child: SvgPicture.asset(
                     'asset/menu/menu.svg',
-                    color: selectindex.value == 0 ? KprimaryColor : KscandColor,
+                    color: selectindex.value == 3 ? KprimaryColor : KscandColor,
                   ),
                 ),
               ),

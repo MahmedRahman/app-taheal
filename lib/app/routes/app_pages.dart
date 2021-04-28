@@ -16,26 +16,16 @@ import 'package:eradah/app/modules/authiocation/views/profile_user_view.dart';
 import 'package:eradah/app/modules/authiocation/views/signin_view.dart';
 import 'package:eradah/app/modules/authiocation/views/signup_view.dart';
 import 'package:eradah/app/modules/authiocation/views/splash_view.dart';
-import 'package:eradah/app/modules/category/bindings/category_binding.dart';
-import 'package:eradah/app/modules/category/views/category_detailes_view.dart';
-import 'package:eradah/app/modules/category/views/category_view.dart';
 import 'package:eradah/app/modules/home/bindings/home_binding.dart';
 import 'package:eradah/app/modules/home/views/home_view.dart';
-import 'package:eradah/app/modules/levels/bindings/levels_binding.dart';
 import 'package:eradah/app/modules/levels/detail/bindings/levels_detail_binding.dart';
 import 'package:eradah/app/modules/levels/detail/views/levels_detail_view.dart';
 import 'package:eradah/app/modules/levels/list/bindings/levels_list_binding.dart';
 import 'package:eradah/app/modules/levels/list/views/levels_list_view.dart';
-import 'package:eradah/app/modules/levels/views/levels_detaile_view.dart';
-import 'package:eradah/app/modules/levels/views/levels_view.dart';
-import 'package:eradah/app/modules/notifaction/bindings/notifaction_binding.dart';
-import 'package:eradah/app/modules/notifaction/views/notifaction_view.dart';
 import 'package:eradah/app/modules/plan/detail/bindings/plan_detail_binding.dart';
 import 'package:eradah/app/modules/plan/detail/views/plan_detail_view.dart';
 import 'package:eradah/app/modules/plan/list/bindings/plan_list_binding.dart';
 import 'package:eradah/app/modules/plan/list/views/plan_list_view.dart';
-import 'package:eradah/app/modules/setting/bindings/setting_binding.dart';
-import 'package:eradah/app/modules/setting/views/setting_view.dart';
 import 'package:eradah/app/modules/subscription/bindings/subscription_binding.dart';
 import 'package:eradah/app/modules/subscription/views/subscription_view.dart';
 
@@ -45,6 +35,12 @@ class AppPages {
   static const INITIAL = Routes.SplashView;
 
   static final routes = [
+
+     GetPage(
+      name: Routes.HOME,
+      page: () => HomeView(),
+      binding: HomeBinding(),
+    ),
     GetPage(
       name: Routes.AUTHIOCATION,
       page: () => AuthiocationView(),
@@ -90,36 +86,13 @@ class AppPages {
       page: () => ActivitesListVideoView(),
       binding: ActivitiesBinding(),
     ),
-    GetPage(
-      name: Routes.LevelsDetaileView,
-      page: () => LevelsDetaileView(),
-      binding: LevelsBinding(),
-    ),
-    GetPage(
-      name: Routes.LEVELS,
-      page: () => LevelsView(),
-      binding: LevelsBinding(),
-    ),
+   
     GetPage(
       name: Routes.ACOUNT,
       page: () => AcountView(),
       binding: AcountBinding(),
     ),
-    GetPage(
-      name: Routes.CATEGORY,
-      page: () => CategoryView(),
-      binding: CategoryBinding(),
-    ),
-    GetPage(
-      name: Routes.CategoryDetailesView,
-      page: () => CategoryDetailesView(),
-      binding: CategoryBinding(),
-    ),
-    GetPage(
-      name: Routes.HOME,
-      page: () => HomeView(),
-      binding: CategoryBinding(),
-    ),
+
     GetPage(
       name: Routes.ForgetpasswordView,
       page: () => ForgetpasswordView(),
@@ -135,16 +108,8 @@ class AppPages {
       page: () => ProfilekidsMotorView(),
       binding: AuthiocationBinding(),
     ),
-    GetPage(
-      name: Routes.SETTING,
-      page: () => SettingView(),
-      binding: SettingBinding(),
-    ),
-    GetPage(
-      name: Routes.NOTIFACTION,
-      page: () => NotifactionView(),
-      binding: NotifactionBinding(),
-    ),
+ 
+
     GetPage(
       name: Routes.SUBSCRIPTION,
       page: () => SubscriptionView(),

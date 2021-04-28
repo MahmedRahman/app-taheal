@@ -86,30 +86,72 @@ class AcountView extends GetView<AcountController> {
                     height: 25,
                   ),
                   Column(
-                    children: List.generate(6, (index) {
-                      return Directionality(
-                        textDirection: TextDirection.rtl,
-                        child: ListTile(
-                          onTap: () {
-                            Get.find<UserAuth>().setUserToken(null);
-
-                            Get.toNamed(Routes.SigninView);
-                          },
-                          title: Text(
-                            Listlabel.elementAt(index),
-                            style: TextStyle(
-                                color: Colors.black,
-                                fontWeight: FontWeight.w500,
-                                fontSize: 15),
+                    children: [
+                      ListTile(
+                        onTap: () {},
+                        title: Text(
+                          'تعديل الحساب',
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontWeight: FontWeight.w500,
+                            fontSize: 15,
                           ),
-                          leading: SvgPicture.asset(Listimage.elementAt(index)),
-                          trailing: Icon(
-                            Icons.arrow_forward_ios,
-                            color: KprimaryColor,
-                          ),
+                          textAlign: TextAlign.right,
                         ),
-                      );
-                    }).toList(),
+                        trailing: SvgPicture.asset('asset/account/01.svg'),
+                        leading: Icon(
+                          Icons.arrow_forward_ios,
+                          color: KprimaryColor,
+                        ),
+                      ),
+                      ListTile(
+                          onTap: () {},
+                          title: Text(
+                            'مركز المساعدة',
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontWeight: FontWeight.w500,
+                              fontSize: 15,
+                            ),
+                            textAlign: TextAlign.right,
+                          ),
+                          trailing: SvgPicture.asset('asset/account/02.svg'),
+                          leading: Text('01002089079')),
+                      ListTile(
+                        onTap: () {},
+                        title: Text(
+                          'حول ارادة',
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontWeight: FontWeight.w500,
+                            fontSize: 15,
+                          ),
+                          textAlign: TextAlign.right,
+                        ),
+                        trailing: SvgPicture.asset('asset/account/03.svg'),
+                        leading: Icon(
+                          Icons.arrow_forward_ios,
+                          color: KprimaryColor,
+                        ),
+                      ),
+                      ListTile(
+                        onTap: () {
+                          Get.find<UserAuth>().setUserToken(null);
+                          Get.toNamed(Routes.SigninView);
+                        },
+                        title: Text(
+                          'تسجيل الخروج',
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontWeight: FontWeight.w500,
+                            fontSize: 15,
+                          ),
+                          textAlign: TextAlign.right,
+                        ),
+                        trailing: SvgPicture.asset('asset/account/06.svg'),
+                       
+                      ),
+                    ],
                   )
                 ],
               ),

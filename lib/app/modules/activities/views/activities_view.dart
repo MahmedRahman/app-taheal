@@ -1,3 +1,4 @@
+import 'package:eradah/app/data/helper/AppTheme.dart';
 import 'package:eradah/app/modules/activities/model/vedio_model.dart';
 import 'package:eradah/app/routes/app_pages.dart';
 import 'package:flutter/material.dart';
@@ -7,14 +8,14 @@ import 'package:eradah/app/modules/activities/controllers/activities_controller.
 import 'package:lottie/lottie.dart';
 
 class ActivitiesView extends GetView<ActivitiesController> {
-
-ActivitiesController controller = Get.put(ActivitiesController());
+  ActivitiesController controller = Get.put(ActivitiesController());
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
+     
           children: [
             bulidSlider(),
             FutureBuilder(
@@ -23,13 +24,9 @@ ActivitiesController controller = Get.put(ActivitiesController());
                 if (snapshot.connectionState == ConnectionState.done) {
                   if (snapshot.hasError) {
                     return Center(
-                      child: Text(
-                        '${snapshot.error} occured',
-                        style: TextStyle(fontSize: 18),
-                      ),
+                      child: CircularProgressIndicator(),
                     );
                   } else if (snapshot.hasData) {
-                    // Extracting data from snapshot object
                     List<Datum> data = snapshot.data;
                     return Column(
                       children: List.generate(data.length, (index) {
@@ -40,7 +37,7 @@ ActivitiesController controller = Get.put(ActivitiesController());
                           ),
                           child: Container(
                             decoration: BoxDecoration(
-                              color: Colors.grey,
+                              color: KprimaryColor,
                               borderRadius:
                                   BorderRadius.all(Radius.circular(20)),
                             ),
@@ -48,7 +45,11 @@ ActivitiesController controller = Get.put(ActivitiesController());
                             child: Center(
                               child: ListTile(
                                   onTap: () {
-                                    Get.toNamed(Routes.ActivitesListVideoView ,arguments: data.elementAt(index).id.toString());
+                                    Get.toNamed(Routes.ActivitesListVideoView,
+                                        arguments: data
+                                            .elementAt(index)
+                                            .id
+                                            .toString());
                                   },
                                   title: Text(
                                     data.elementAt(index).title,
@@ -59,7 +60,16 @@ ActivitiesController controller = Get.put(ActivitiesController());
                                       fontWeight: FontWeight.bold,
                                     ),
                                   ),
-                                  leading:
+                                  subtitle: Text(
+                                    data.elementAt(index).details,
+                                    textAlign: TextAlign.right,
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  trailing:
                                       Image.network(data.elementAt(index).img)
                                   //SvgPicture.network(data.elementAt(index).img),
                                   ),
@@ -160,4 +170,18 @@ Container bulidSlider() {
       ],
     ),
   );
+}
+
+
+class HexColorFormString {
+  int getColorFromHex(String hexColor) {
+    hexColor = hexColor.toUpperCase().replaceAll("#", "");
+    if (hexColor.length == 6) {
+      hexColor = "FF" + hexColor;
+    }
+    if (hexColor.length == 3) {
+      hexColor = "FF" + hexColor + hexColor;
+    }
+    return int.parse(hexColor, radix: 16);
+  }
 }

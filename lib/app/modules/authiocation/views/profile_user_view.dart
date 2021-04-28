@@ -10,8 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
-class ProfileUserView extends  GetView<AuthiocationController> {
-
+class ProfileUserView extends GetView<AuthiocationController> {
   var familyType = 1.obs;
 
   List<String> genderImage = [
@@ -46,6 +45,13 @@ class ProfileUserView extends  GetView<AuthiocationController> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
+                    SizedBox(
+                      height: 20,
+                    ),
+                    SizedBox(
+                      child: Image.asset('asset/images/logo.png'),
+                      width: 100,
+                    ),
                     Container(
                       width: Get.width,
                       child: Text(
@@ -59,7 +65,7 @@ class ProfileUserView extends  GetView<AuthiocationController> {
                       ),
                     ),
                     SizedBox(
-                      height: 10,
+                      height: 20,
                     ),
                     Text(
                       'ساعدنا في تخصص برنامجك وفقا لإحتياجات طفلك من خلال مشاركة بعض المعلومات الأساسية ',
@@ -71,9 +77,9 @@ class ProfileUserView extends  GetView<AuthiocationController> {
                       textAlign: TextAlign.center,
                     ),
                     SizedBox(
-                      height: 10,
+                      height: 20,
                     ),
-                    Obx(() {
+                    /*  Obx(() {
                       return Row(
                         textDirection: TextDirection.rtl,
                         children: List.generate(
@@ -124,6 +130,7 @@ class ProfileUserView extends  GetView<AuthiocationController> {
                         ).toList(),
                       );
                     }),
+                */
                     SizedBox(
                       height: 10,
                     ),
@@ -145,7 +152,7 @@ class ProfileUserView extends  GetView<AuthiocationController> {
                           child: Column(
                             children: [
                               SizedBox(
-                                height: 10,
+                                height: 15,
                               ),
                               SizedBox(
                                 width: Get.width * .9,
@@ -154,8 +161,9 @@ class ProfileUserView extends  GetView<AuthiocationController> {
                                   style: headline2.copyWith(),
                                   textAlign: TextAlign.right,
                                 ),
+                              ),   SizedBox(
+                                height: 15,
                               ),
-                              
                               Obx(() {
                                 return CustomDropdownButton(
                                   listDropdown: ListRlationShip.map(
@@ -166,13 +174,15 @@ class ProfileUserView extends  GetView<AuthiocationController> {
                                   labelDropdownButton: 'علاقات بالطفل'.tr,
                                   selectText: familyType.value.toString().obs,
                                   onChanged: (value) {
-                                   // print(value.toString());
+                                    // print(value.toString());
                                     familyType.value =
                                         int.parse(value.toString());
                                     // controller.s
                                   },
                                 );
-                              }),
+                              }),  SizedBox(
+                                height: 10,
+                              ),
                               CustomTextFormFiled(
                                 inputLabel: 'الاسم الاول',
                                 inputHit: 'الاسم الاول',
@@ -204,7 +214,6 @@ class ProfileUserView extends  GetView<AuthiocationController> {
                               ),
                               Row(
                                 children: [
-                             
                                   Expanded(
                                     child: CustomTextFormFiled(
                                         inputLabel: 'رقم الهاتف',
@@ -215,11 +224,14 @@ class ProfileUserView extends  GetView<AuthiocationController> {
                                           //return AppValidation.checkMobile(value);
                                         }),
                                   ),
-                                       Padding(
+                                  Padding(
                                     padding: const EdgeInsets.symmetric(
-                                      horizontal: 20
+                                        horizontal: 20),
+                                    child: Text(
+                                      '+02',
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold),
                                     ),
-                                    child: Text('+02',style: TextStyle(fontWeight: FontWeight.bold),),
                                   ),
                                 ],
                               ),
@@ -237,12 +249,6 @@ class ProfileUserView extends  GetView<AuthiocationController> {
                           child: CustemButton(
                             buttonText: 'Next'.tr,
                             onPressed: () {
-                            
-                            
-                           
-
-
-
                               if (_formKey.currentState.validate()) {
                                 Get.toNamed(Routes.ProfileKidsView);
                               }

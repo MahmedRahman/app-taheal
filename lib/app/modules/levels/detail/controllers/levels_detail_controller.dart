@@ -4,31 +4,35 @@ import 'package:eradah/app/modules/levels/detail/model/question.dart';
 import 'package:get/get.dart';
 
 class LevelsDetailController extends GetxController {
-  //TODO: Implement LevelsDetailController
+  var QuestionId;
 
-  final count = 0.obs;
-  @override
-  void onInit() {
-    super.onInit();
-  }
-
-  @override
-  void onReady() {
-    super.onReady();
-  }
-
-  @override
-  void onClose() {}
-  void increment() => count.value++;
+  var QestionListFutter = Future.value().obs;
 
   getQestion(int quetionsid) async {
-    ResponsModel responsModel = await WebSerives()
-        .getQuetionsCategoryDetailes(quetionsid: quetionsid);
+    QuestionId = quetionsid;
+    ResponsModel responsModel =
+        await WebSerives().getQuetionsCategoryDetailes(quetionsid: quetionsid);
     if (responsModel.success) {
       Response response = responsModel.data;
 
       final quetionsModel = quetionsModelFromJson(response.bodyString);
-      return quetionsModel.data;
+      QestionListFutter.value = Future.value(quetionsModel.data);
+      //return quetionsModel.data;
+    }
+  }
+
+  setQestion(int quetionsid) async {
+    ResponsModel responsModel = await WebSerives().setQuetionComplate(
+      quetionsid: quetionsid,
+      complateStaus: 1,
+    );
+
+    if (responsModel.success) {
+      Response response = responsModel.data;
+      if(response.body['success']){
+        
+      }
+      getQestion(QuestionId);
     }
   }
 }

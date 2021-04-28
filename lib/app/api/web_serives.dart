@@ -42,7 +42,11 @@ class WebSerives {
     int beforeNineMonth = 0,
     String image = 'test',
   }) async {
-    final data = FormData({
+    //final data = FormData();
+
+    ResponsModel responsModel = await APIManger().repPost(
+      'register',
+      {
       'first_name': firstName,
       'last_name': lastName,
       'email': email,
@@ -60,11 +64,7 @@ class WebSerives {
       'medical_splints': medicalSplints,
       // 'image': MultipartFile(file, filename: 'aa.jpg')
       //'image': MultipartFile(file,filename: 'aa.jpg'),
-    });
-
-    ResponsModel responsModel = await APIManger().repPost(
-      'register',
-      data,
+    },
     );
     return responsModel;
   }
@@ -106,7 +106,8 @@ class WebSerives {
   }
 
   Future getQuetionsCategoryDetailes({@required int quetionsid}) async {
-    ResponsModel responsModel = await APIManger().repGet('quetions/'+quetionsid.toString());
+    ResponsModel responsModel =
+        await APIManger().repGet('quetions/' + quetionsid.toString());
     return responsModel;
   }
 
@@ -114,6 +115,14 @@ class WebSerives {
       {@required int quetionsid, int complateStaus}) async {
     ResponsModel responsModel = await APIManger().repPost(
         'complate_quetion', {'complate': complateStaus, 'quetion': quetionsid});
+    return responsModel;
+  }
+
+  Future setViedoComplate({@required int vedioid, int complateStaus}) async {
+    ResponsModel responsModel = await APIManger().repPost('complate_vedio', {
+      'complate': complateStaus,
+      'vedio': vedioid,
+    });
     return responsModel;
   }
 }

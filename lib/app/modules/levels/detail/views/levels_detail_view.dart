@@ -12,86 +12,94 @@ class LevelsDetailView extends GetView<LevelsDetailController> {
 
   @override
   Widget build(BuildContext context) {
+    controller.getQestion(Get.arguments[0]);
+
     return Scaffold(
       appBar: AppBar(
-        title: Text( Get.arguments[2]),
+        title: Text(Get.arguments[2]),
         centerTitle: true,
       ),
-      body: FutureBuilder(
-          future: controller.getQestion(Get.arguments[0]),
-          builder: (context, snapshot) {
-            if (snapshot.hasData) {
-              List<Datum> data = snapshot.data;
-              return ListView(
-                children: [
-                  Container(
-                    padding: EdgeInsets.symmetric(horizontal: 25, vertical: 25),
-                    decoration: BoxDecoration(color: KprimaryColor),
-                    child: Column(
+      body: GetX(
+          init: LevelsDetailController(),
+          builder: (controller) {
+            return FutureBuilder(
+                future: controller.QestionListFutter.value,
+                builder: (context, snapshot) {
+                  if (snapshot.hasData) {
+                    List<Datum> data = snapshot.data;
+                    return ListView(
                       children: [
-                        Text(
-                          Get.arguments[1],
-                          style: TextStyle(color: Colors.white),
-                          textAlign: TextAlign.center,
+                        Container(
+                          padding: EdgeInsets.symmetric(
+                            horizontal: 25,
+                            vertical: 25,
+                          ),
+                          decoration: BoxDecoration(color: KprimaryColor),
+                          child: Column(
+                            children: [
+                              Text(
+                                Get.arguments[1],
+                                style: TextStyle(color: Colors.white),
+                                textAlign: TextAlign.center,
+                              )
+                            ],
+                          ),
                         ),
-                        Text(
-                          'المهارات 1 من 4',
-                          style: TextStyle(color: Colors.white),
-                          textAlign: TextAlign.center,
-                        ),
-                        Text(
-                          'تحققي من مراحل تطور المهارة التي بلغها طفلك وعن امكانياته وقدراته وعما تتوقعينه لاحقا',
-                          style: TextStyle(color: Colors.white),
-                        ),
-                        Text(
-                          'وضع عالمة علي انه مكتمل في حالة ما اتقن معاذ المهارة',
-                          style: TextStyle(color: Colors.white),
-                          textAlign: TextAlign.center,
+                        Container(
+                          child: Column(
+                            children: List.generate(data.length, (index) {
+                              Datum question = data.elementAt(index);
+                              return Padding(
+                                padding: EdgeInsets.all(20),
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    border: Border.all(
+                                      color: Colors.blueAccent,
+                                    ),
+                                  ),
+                                  child: Container(
+                                    color: question.complate == "1"
+                                        ? Colors.grey.shade200
+                                        : Colors.white,
+                                    padding: EdgeInsets.all(15),
+                                    child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      children: [
+                                        Text(
+                                          question.title ?? '',
+                                          textAlign: TextAlign.center,
+                                        ),
+                                        Text(question.subTitle ?? ''),
+                                        SizedBox(
+                                          height: 10,
+                                        ),
+                                       question.complate == "1"
+                                        ? SizedBox.shrink() : SizedBox(
+                                          width: Get.width,
+                                          child: CustemButton(
+                                            buttonText: 'اكتمل؟',
+                                            onPressed: () {
+                                              controller
+                                                  .setQestion(question.id);
+                                            },
+                                          ),
+                                        ) 
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              );
+                            }).toList(),
+                          ),
                         ),
                       ],
-                    ),
-                  ),
-                  Container(
-                    child: Column(
-                      children: List.generate(data.length, (index) {
-                        Datum question = data.elementAt(index);
-                        return Padding(
-                          padding: EdgeInsets.all(20),
-                          child: Container(
-                            decoration: BoxDecoration(
-                                border: Border.all(color: Colors.blueAccent)),
-                            child: Container(
-                              padding: EdgeInsets.all(15),
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  Text(
-                                    question.title ??'',
-                                    textAlign: TextAlign.center,
-                                  ),
-                                  Text( question.subTitle ?? ''),
-                                  SizedBox(
-                                    height: 10,
-                                  ),
-                                  SizedBox(
-                                    width: Get.width,
-                                    child: CustemButton(
-                                      buttonText: 'اكتمل؟',
-                                    ),
-                                  )
-                                ],
-                              ),
-                            ),
-                          ),
-                        );
-                      }).toList(),
-                    ),
-                  ),
-                ],
-              );
-            }
-            return CircularProgressIndicator();
+                    );
+                  }
+                  return CircularProgressIndicator();
+                });
           }),
     );
   }

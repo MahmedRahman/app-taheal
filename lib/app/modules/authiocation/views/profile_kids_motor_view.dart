@@ -7,7 +7,7 @@ import 'package:eradah/app/data/component/CustemButton.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import 'package:eradah/app/modules/category/controllers/category_controller.dart';
+
 
 class ProfilekidsMotorView extends GetView<AuthiocationController> {
   List<String> CategoryList;
@@ -48,6 +48,7 @@ class ProfilekidsMotorView extends GetView<AuthiocationController> {
                       crossAxisCount: 3,
                       // Generate 100 widgets that display their index in the List.
                       children: List.generate(MotorFunctions.length, (index) {
+                        controller.motorFunction.value = int.parse(MotorFunctions.first['id']) ;
                         return InkWell(
                           onTap: () {
                             print(MotorFunctions.elementAt(index)['id'].toString());

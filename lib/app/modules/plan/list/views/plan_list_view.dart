@@ -18,35 +18,36 @@ import '../controllers/plan_list_controller.dart';
 class PlanListView extends GetView<PlanListController> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SingleChildScrollView(
-        child: Column(
+    PlanListController controller = Get.put(PlanListController());
+controller.getPlan();
+    return DefaultTabController(
+      length: 2,
+      child: Scaffold(
+        appBar: PreferredSize(
+          preferredSize: Size.fromHeight( 50),
+          child: Container(
+            color: KprimaryColor,
+            child: Column(
+              children: [
+               // bulidSlider(),(Get.height * .3)+
+                TabBar(
+                  tabs: [
+                    Tab(
+                      text: 'الانشطة الحالية',
+                    ),
+                    Tab(
+                      text: 'الانشطة السابقة',
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        ),
+        body: TabBarView(
           children: [
-            bulidSlider(),
-            DefaultTabController(
-              initialIndex: 0,
-              length: 2,
-              child: Column(
-                children: [
-                  TabBar(
-                    unselectedLabelColor: Colors.black,
-                    labelColor: Colors.green,
-                    tabs: [
-                      Tab(
-                        child: Text("الأنشطة الحالية"),
-                      ),
-                      Tab(
-                        child: Text("الأنشطة السابقة"),
-                      )
-                    ],
-                  ),
-                ],
-              ),
-            ),
-            SizedBox(
-              height: 25,
-            ),
-            listVideo(),
+            listVideo(0),
+            listVideo(1),
           ],
         ),
       ),
@@ -55,40 +56,36 @@ class PlanListView extends GetView<PlanListController> {
 }
 
 class listVideo extends GetView<PlanListController> {
-  const listVideo({
-    Key key,
-  }) : super(key: key);
+  listVideo(this.listtype);
+  int listtype;
 
   @override
   Widget build(BuildContext context) {
-    PlanListController controller = Get.put(PlanListController());
-    return FutureBuilder(
-        future: controller.getPlan(),
-        builder: (context, snapshot) {
-          List<MyVedio> videolist = snapshot.data;
 
-          if (snapshot.hasData) {
-            return Column(
-              children: [
-                Column(
+    return GetX(
+        init: PlanListController(),
+        builder: (controller) {
+          return FutureBuilder(
+            future: listtype == 1 ? controller.VedioComplateListFutter.value :controller.VedioNotComplateListFutter.value  ,
+            builder: (context, snapshot) {
+              List<MyVedio> videolist = snapshot.data;
+              if (snapshot.hasData) {
+                return ListView(
                   children: List.generate(
                     videolist.length,
                     (index) {
                       MyVedio myVedio = videolist.elementAt(index);
-
                       return Card(
                         elevation: 2,
                         margin: EdgeInsets.all(15),
                         child: InkWell(
                           onTap: () {
-
                             Navigator.push(
-    context,
-    MaterialPageRoute(builder: (context) => PlanDetailView(myVedio)),
-  );
-
-                            //Get.to(PlanDetailView(myVedio));
-                            //
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => PlanDetailView(myVedio),
+                              ),
+                            );
                           },
                           child: Column(
                             children: [
@@ -106,10 +103,11 @@ class listVideo extends GetView<PlanListController> {
                                     ),
                                   ),
                                   title: Text(
-                                    myVedio.catTitle,
+                                    myVedio.title,
                                     style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        color: KprimaryColor),
+                                      fontWeight: FontWeight.bold,
+                                      color: KprimaryColor,
+                                    ),
                                   ),
                                   subtitle: Text(
                                     myVedio.descCat,
@@ -125,13 +123,15 @@ class listVideo extends GetView<PlanListController> {
                                   Positioned.fill(
                                     child: Container(
                                       decoration: BoxDecoration(
-                                          color: Colors.grey.withOpacity(.4)),
+                                        color: Colors.grey.withOpacity(.4),
+                                      ),
                                       child: Center(
-                                          child: Icon(
-                                        Icons.play_circle_fill,
-                                        color: Colors.white,
-                                        size: 64,
-                                      )),
+                                        child: Icon(
+                                          Icons.play_circle_fill,
+                                          color: Colors.white,
+                                          size: 64,
+                                        ),
+                                      ),
                                     ),
                                   ),
                                 ],
@@ -146,11 +146,15 @@ class listVideo extends GetView<PlanListController> {
                                       title: appName,
                                       message:
                                           'تم الانتهاء من عمل النشاط اللزم وسيتنقل الى الانشطة السابقة',
-                                      snackbarStatus: () {},
+                                      snackbarStatus: () {
+                                        controller.setCommplate(
+                                            vedioid: myVedio.id, omplate: 1);
+                                      },
                                     );
                                   },
                                   label: Text(
-                                      'وضع علامة على النشاط على أنه مكتمل'),
+                                    'وضع علامة على النشاط على أنه مكتمل',
+                                  ),
                                   icon: Icon(Icons.done_all),
                                 ),
                               ),
@@ -168,25 +172,25 @@ class listVideo extends GetView<PlanListController> {
                                             primary: KprimaryColor),
                                         onPressed: () {
                                           Get.defaultDialog(
-                                              title: 'التجارب المبكرة',
-                                              titleStyle: TextStyle(
-                                                fontWeight: FontWeight.bold,
-                                                color: KprimaryColor,
-                                                fontFamily: 'cairo',
-                                                fontSize: 20,
-                                              ),
-                                              content: Container(
-                                                child: SizedBox(
-                                                  height: Get.height * .5,
-                                                  child: Column(
-                                                    children: [
-                                                      Html(
-                                                        data: myVedio.details,
-                                                      ),
-                                                    ],
+                                            title: myVedio.title,
+                                            titleStyle: TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                              color: KprimaryColor,
+                                              fontFamily: 'cairo',
+                                              fontSize: 20,
+                                            ),
+                                            content: Directionality(
+                                              textDirection: TextDirection.rtl,
+                                              child: SizedBox(
+                                                height: 200,
+                                                child: SingleChildScrollView(
+                                                  child: Html(
+                                                    data: myVedio.details,
                                                   ),
                                                 ),
-                                              ));
+                                              ),
+                                            ),
+                                          );
                                         },
                                         label: Text('الوصف'),
                                         icon: Icon(Icons.read_more),
@@ -199,89 +203,98 @@ class listVideo extends GetView<PlanListController> {
                                             primary: KprimaryColor),
                                         onPressed: () {
                                           Get.defaultDialog(
-                                              title:
-                                                  'ساعدنا في وضع خطة أفضل لك ولطفلك',
-                                              titleStyle: TextStyle(
-                                                fontWeight: FontWeight.bold,
-                                                color: KprimaryColor,
-                                                fontFamily: 'cairo',
-                                                fontSize: 14,
-                                              ),
-                                              content: Column(
-                                                children: [
-                                                  Text(
-                                                    'هل استمتع طفلك بهذا النشاط',
-                                                    style: TextStyle(
-                                                        fontWeight:
-                                                            FontWeight.bold),
+                                            title:
+                                                'ساعدنا في وضع خطة أفضل لك ولطفلك',
+                                            titleStyle: TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                              color: KprimaryColor,
+                                              fontFamily: 'cairo',
+                                              fontSize: 14,
+                                            ),
+                                            content: Column(
+                                              children: [
+                                                Text(
+                                                  'هل استمتع طفلك بهذا النشاط',
+                                                  style: TextStyle(
+                                                    fontWeight: FontWeight.bold,
                                                   ),
-                                                  Row(
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .spaceBetween,
-                                                    children: [
-                                                      InkWell(
-                                                        onTap: () {
-                                                          Get.back();
-                                                          showSnackBar(
-                                                            title: appName,
-                                                            message:
-                                                                'تم تقيم الفيديو',
-                                                            snackbarStatus:
-                                                                () {},
-                                                          );
-                                                        },
-                                                        child: Padding(
-                                                          padding:
-                                                              const EdgeInsets
-                                                                  .all(15),
-                                                          child: Container(
-                                                            decoration:
-                                                                BoxDecoration(
-                                                              shape: BoxShape
-                                                                  .circle,
-                                                            ),
-                                                            child: SvgPicture
-                                                                .asset(
-                                                              'asset/images/like.svg',
-                                                              width: 64,
-                                                            ),
+                                                ),
+                                                Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment
+                                                          .spaceBetween,
+                                                  children: [
+                                                    InkWell(
+                                                      onTap: () {
+                                                        Get.back();
+                                                        showSnackBar(
+                                                          title: appName,
+                                                          message:
+                                                              'تم تقيم الفيديو',
+                                                          snackbarStatus: () {
+                                                            controller.setRate(
+                                                                vedioid:
+                                                                    myVedio.id,
+                                                                rate: 0);
+                                                          },
+                                                        );
+                                                      },
+                                                      child: Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .all(15),
+                                                        child: Container(
+                                                          decoration:
+                                                              BoxDecoration(
+                                                            shape:
+                                                                BoxShape.circle,
+                                                          ),
+                                                          child:
+                                                              SvgPicture.asset(
+                                                            'asset/images/like.svg',
+                                                            width: 64,
                                                           ),
                                                         ),
                                                       ),
-                                                      InkWell(
-                                                        onTap: () {
-                                                          Get.back();
-                                                          showSnackBar(
-                                                            title: appName,
-                                                            message:
-                                                                'تم تقيم الفيديو',
-                                                            snackbarStatus:
-                                                                () {},
-                                                          );
-                                                        },
-                                                        child: Padding(
-                                                          padding:
-                                                              const EdgeInsets
-                                                                  .all(15),
-                                                          child: Container(
-                                                            decoration:
-                                                                BoxDecoration(
-                                                              shape: BoxShape
-                                                                  .circle,
-                                                            ),
-                                                            child: SvgPicture
-                                                                .asset(
-                                                              'asset/images/dislike.svg',
-                                                              width: 64,
-                                                            ),
+                                                    ),
+                                                    InkWell(
+                                                      onTap: () {
+                                                        Get.back();
+                                                        showSnackBar(
+                                                          title: appName,
+                                                          message:
+                                                              'تم تقيم الفيديو',
+                                                          snackbarStatus: () {
+                                                            controller.setRate(
+                                                                vedioid:
+                                                                    myVedio.id,
+                                                                rate: 1);
+                                                          },
+                                                        );
+                                                      },
+                                                      child: Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .all(15),
+                                                        child: Container(
+                                                          decoration:
+                                                              BoxDecoration(
+                                                            shape:
+                                                                BoxShape.circle,
+                                                          ),
+                                                          child:
+                                                              SvgPicture.asset(
+                                                            'asset/images/dislike.svg',
+                                                            width: 64,
                                                           ),
                                                         ),
                                                       ),
-                                                    ],
-                                                  )
-                                                ],
-                                              ));
+                                                    ),
+                                                  ],
+                                                )
+                                              ],
+                                            ),
+                                          );
                                         },
                                         label: Text('تقييم'),
                                         icon: Icon(Icons.rate_review),
@@ -299,14 +312,15 @@ class listVideo extends GetView<PlanListController> {
                       );
                     },
                   ),
-                ),
-              ],
-            );
-          }
+                );
+              }
 
-          return Container(
-            child: Text('data'),
+              return Center(
+                child: CircularProgressIndicator(),
+              );
+            },
           );
         });
   }
 }
+

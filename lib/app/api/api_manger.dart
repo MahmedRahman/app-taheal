@@ -23,14 +23,6 @@ class APIManger extends GetConnect {
   void login() {
     String tokan = Get.find<UserAuth>().getUserToken();
 
-    print('read login');
-
-    print(tokan);
-
-    print('end read login');
-
-   // tokan =
-     //   "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiZjIyNmNhZGZiOWI4MGQ1MzkwYTJlYmU5MTY4MmI3ZDg0MDQxZTM3MDgzNzc2NzBhMGY2MmZjNWIyMDE5YzhlN2U5YjBkZmZiNmNmNGNiZWYiLCJpYXQiOjE2MTkzNTY2NzUsIm5iZiI6MTYxOTM1NjY3NSwiZXhwIjoxNjUwODkyNjc1LCJzdWIiOiIyIiwic2NvcGVzIjpbXX0.IGelRm_nBt9a1kdEYKCOSUZCK_de8m3qn4jYtMj0CXpgF4E91IPN78yYPyRNGo2N5c4xVE5VVJonK9l1qHcFuUeT9y9ZIQzlX8rd9ay_oE4HzMjGYM82-2yvJDJem4yFkjR38foiPBizv90NQhqvY-JPfOGwSe1wkeW8evGfr4xrYnmeYRVlVqAdUWr78OADRGgkSOuTf3ML9XTEuNNzjRxwNRr-VALvLHZVaRvncmTbVt1EO9wY-ebwRMV2Z6g6nNGR0VEpktdSb5yYfm66-OZn27K5ycHAAWXzp_9j9rM5Xxuo2XtKeJ_0nk82baIaNhhy5w6GCM3RReMd0irG15qcmxgbaUSlWR-pt-KJkRoWgf7JG-a7ucvbmmPLkB5M-MUxy6e6B2F_YFsdGGehSGhf16LFpxMLDpoDFmcJWV96SuyqvRJn6Fc9_ve5HAxRQgpYfqaPC_hBh-AdjWtqEBkuuVWrBi3elHnKDG8Lh_SAvvbCCmGttOx0M66KvhRgJpf0xreIlfDIkTKUPiWeiNQI0ZattWy_bVzom0zrWcaxZ-8-95feRY6ixFfPNDnyVnuv_FwDp4Y-6Ps4p1nEiUN_lqC6kfCEmTuD7ewOKeUyvi0rmMsLRdwLXa2gR8LQXQNcLcvDCnCgODlR95DwwiYQj1uaG7niGgItZM0t-jE";
 
     if (tokan != null) {
       header.update(
