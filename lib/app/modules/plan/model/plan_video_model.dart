@@ -81,13 +81,13 @@ class MyVedio {
         id: json["id"],
         rate: json["rate"] == null ? null : json["rate"],
         complate: json["complate"] == null ? null : json["complate"],
-        title: json["title"],
-        meta: json["meta"],
-        details: json["details"],
-        catTitle: json["cat_title"],
-        descCat: json["desc_cat"],
-        vedio: json["vedio"],
-        img: json["img"],
+        title: json["title"]== null ? '' : json["title"],
+        meta: json["meta"]== null ? '' : json["meta"],
+        details: json["details"]== null ? '' : json["details"],
+        catTitle: json["cat_title"]== null ? '' : json["cat_title"],
+        descCat: json["desc_cat"]== null ? '' : json["desc_cat"],
+        vedio: json["vedio"]== null ? '' : json["vedio"],
+        img: json["img"]== null ? '' : json["img"],
     );
 
     Map<String, dynamic> toJson() => {

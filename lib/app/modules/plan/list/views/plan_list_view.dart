@@ -68,8 +68,14 @@ class listVideo extends GetView<PlanListController> {
           return FutureBuilder(
             future: listtype == 1 ? controller.VedioComplateListFutter.value :controller.VedioNotComplateListFutter.value  ,
             builder: (context, snapshot) {
-              List<MyVedio> videolist = snapshot.data;
+
+
+
+             
               if (snapshot.hasData) {
+
+                
+                 List<MyVedio> videolist = snapshot.data;
                 return ListView(
                   children: List.generate(
                     videolist.length,

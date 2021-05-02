@@ -47,9 +47,9 @@ class Datum {
 
     factory Datum.fromJson(Map<String, dynamic> json) => Datum(
         id: json["id"],
-        title: json["title"],
-        details: json["details"],
-        img: json["img"],
+        title: json["title"] == null ? '' :json["title"] ,
+        details: json["details"]== null ? '' :json["details"],
+        img: json["img"]== null ? '' :json["img"],
     );
 
     Map<String, dynamic> toJson() => {

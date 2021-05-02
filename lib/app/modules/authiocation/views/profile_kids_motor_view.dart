@@ -17,7 +17,9 @@ class ProfilekidsMotorView extends GetView<AuthiocationController> {
 
   @override
   Widget build(BuildContext context) {
+
     print(selectkidsMotor.value == '0');
+    
     CategoryList = [
       'asset/category/01.svg',
       'asset/category/02.svg',
