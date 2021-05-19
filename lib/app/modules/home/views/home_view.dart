@@ -95,8 +95,7 @@ class HomeView extends GetView<HomeController> {
           PlanListView(),
           ActivitiesListView(),
             
-           AcountView(),
-          //LevelsListView(),
+          LevelsListView(),
           AcountView(),
         ]);
       }),
