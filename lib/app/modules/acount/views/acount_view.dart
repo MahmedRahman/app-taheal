@@ -133,6 +133,22 @@ class AcountView extends GetView<AcountController> {
                           Icons.arrow_forward_ios,
                           color: KprimaryColor,
                         ),
+                      ),    ListTile(
+                        onTap: () {},
+                        title: Text(
+                          'سياسة الخصوصية',
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontWeight: FontWeight.w500,
+                            fontSize: 15,
+                          ),
+                          textAlign: TextAlign.right,
+                        ),
+                        trailing: SvgPicture.asset('asset/account/03.svg'),
+                        leading: Icon(
+                          Icons.arrow_forward_ios,
+                          color: KprimaryColor,
+                        ),
                       ),
                       ListTile(
                         onTap: () {

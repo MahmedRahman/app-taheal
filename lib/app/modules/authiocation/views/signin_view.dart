@@ -51,51 +51,15 @@ class SigninView extends GetView<AuthiocationController> {
                           child: SingleChildScrollView(
                             child: Column(
                               children: [
+                                SizedBox(
+                                  height: 20,
+                                ),
                                 Text(
                                   'Register with'.tr,
                                   style: headline2,
                                 ),
                                 SizedBox(
                                   height: 20,
-                                ),
-                                Row(
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    InkWell(
-                                      child: SvgPicture.asset(
-                                        'asset/images/googel.svg',
-                                        width: 32,
-                                        height: 32,
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      width: 20,
-                                    ),
-                                    SvgPicture.asset(
-                                      'asset/images/facebook.svg',
-                                      width: 32,
-                                      height: 32,
-                                    ),
-                                    SizedBox(
-                                      width: 20,
-                                    ),
-                                    SvgPicture.asset(
-                                      'asset/images/apple.svg',
-                                      width: 32,
-                                      height: 32,
-                                    ),
-                                  ],
-                                ),
-                                Padding(
-                                  padding:
-                                      const EdgeInsets.symmetric(vertical: 20),
-                                  child: Text(
-                                    'or'.tr,
-                                    style: headline4.copyWith(
-                                      color: KscandColor,
-                                    ),
-                                  ),
                                 ),
                                 CustomTextFormFiled(
                                   inputLabel: 'email'.tr,
@@ -156,8 +120,8 @@ class SigninView extends GetView<AuthiocationController> {
                             buttonText: 'sigin'.tr,
                             onPressed: () {
                               if (_formKey.currentState.validate()) {
-                               // Get.toNamed(Routes.HOME);
-                               controller.signInWithEmailAndPassword();
+                                // Get.toNamed(Routes.HOME);
+                                controller.signInWithEmailAndPassword();
                               }
                             },
                           ),

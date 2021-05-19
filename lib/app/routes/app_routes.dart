@@ -20,11 +20,13 @@ abstract class Routes {
   static const PlanVideoDetailesView = '/PlanVideoDetailesView';
   static const ActivitesListVideoView = '/ActivitesListVideoView';
 
-
   static const LevelsDetaileView = '/LevelsDetaileView';
   static const SUBSCRIPTION = '/subscription';
   static const PLAN_LIST = '/plan/list';
   static const PLAN_DETAIL = '/plan/detail';
   static const LEVELS_LIST = '/levels/list';
   static const LEVELS_DETAIL = '/levels/detail';
+  static const ACTIVITIES_LIST = '/activities/list';
+  static const ACTIVITIES_DETAIL = '/activities/detail';
+  static const TRIAL = '/trial';
 }

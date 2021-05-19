@@ -60,7 +60,7 @@ class SignupView extends GetView<AuthiocationController> {
                               SizedBox(
                                 height: 10,
                               ),
-                              Row(
+                            /*  Row(
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
@@ -95,7 +95,7 @@ class SignupView extends GetView<AuthiocationController> {
                               Text(
                                 'or'.tr,
                                 style: headline2,
-                              ),
+                              ),*/
                               CustomTextFormFiled(
                                 inputLabel: 'email'.tr,
                                 inputHit: 'email'.tr,

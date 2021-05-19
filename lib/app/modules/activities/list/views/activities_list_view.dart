@@ -1,35 +1,34 @@
 import 'package:eradah/app/data/helper/AppTheme.dart';
-import 'package:eradah/app/modules/activities/model/vedio_model.dart';
+import 'package:eradah/app/modules/activities/list/model/ActivatyModel.dart';
 import 'package:eradah/app/routes/app_pages.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+
 import 'package:get/get.dart';
-import 'package:eradah/app/modules/activities/controllers/activities_controller.dart';
-import 'package:lottie/lottie.dart';
+import 'package:eradah/app/modules/activities/model/vedio_model.dart';
 
-class ActivitiesView extends GetView<ActivitiesController> {
-  ActivitiesController controller = Get.put(ActivitiesController());
+import '../controllers/activities_list_controller.dart';
 
+class ActivitiesListView extends GetView<ActivitiesListController> {
   @override
   Widget build(BuildContext context) {
+    ActivitiesListController controller = Get.put(ActivitiesListController());
+
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
-     
           children: [
             bulidSlider(),
-            FutureBuilder(
-              future: controller.allCategories(),
-              builder: (index, snapshot) {
-                if (snapshot.connectionState == ConnectionState.done) {
-                  if (snapshot.hasError) {
-                    return Center(
-                      child: CircularProgressIndicator(),
-                    );
-                  } else if (snapshot.hasData) {
-                    List<Datum> data = snapshot.data;
+            Obx(() {
+              return FutureBuilder(
+                future: controller.categoriesList.value,
+                builder: (index, snapshot) {
+                  if (snapshot.hasData) {
+                    // List<Datum> data = snapshot.data;
+                    ActivatyModel activatyModel = snapshot.data;
                     return Column(
-                      children: List.generate(data.length, (index) {
+                      children:
+                          List.generate(activatyModel.data.length, (index) {
                         return Padding(
                           padding: const EdgeInsets.symmetric(
                             horizontal: 8,
@@ -37,7 +36,8 @@ class ActivitiesView extends GetView<ActivitiesController> {
                           ),
                           child: Container(
                             decoration: BoxDecoration(
-                              color: KprimaryColor,
+                              color: Color(HexColorFormString().getColorFromHex(
+                                  activatyModel.data.elementAt(index).color)),
                               borderRadius:
                                   BorderRadius.all(Radius.circular(20)),
                             ),
@@ -46,13 +46,13 @@ class ActivitiesView extends GetView<ActivitiesController> {
                               child: ListTile(
                                   onTap: () {
                                     Get.toNamed(Routes.ActivitesListVideoView,
-                                        arguments: data
+                                        arguments: activatyModel.data
                                             .elementAt(index)
                                             .id
                                             .toString());
                                   },
                                   title: Text(
-                                    data.elementAt(index).title,
+                                    '${activatyModel.data.elementAt(index).title}',
                                     textAlign: TextAlign.right,
                                     style: TextStyle(
                                       color: Colors.white,
@@ -60,17 +60,9 @@ class ActivitiesView extends GetView<ActivitiesController> {
                                       fontWeight: FontWeight.bold,
                                     ),
                                   ),
-                                  subtitle: Text(
-                                    data.elementAt(index).details,
-                                    textAlign: TextAlign.right,
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 12,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                  trailing:
-                                      Image.network(data.elementAt(index).img)
+                                  leading: Image.network(
+                                      activatyModel.data.elementAt(index).img)
+                                  //Image.network(data.elementAt(index).img)
                                   //SvgPicture.network(data.elementAt(index).img),
                                   ),
                             ),
@@ -79,12 +71,13 @@ class ActivitiesView extends GetView<ActivitiesController> {
                       }).toList(),
                     );
                   }
-                }
-                return Center(
-                  child: CircularProgressIndicator(),
-                );
-              },
-            ),
+
+                  return Center(
+                    child: CircularProgressIndicator(),
+                  );
+                },
+              );
+            }),
           ],
         ),
       ),
@@ -171,7 +164,6 @@ Container bulidSlider() {
     ),
   );
 }
-
 
 class HexColorFormString {
   int getColorFromHex(String hexColor) {

@@ -18,7 +18,6 @@ import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 
 class ProfileKidsView extends GetView<AuthiocationController> {
-  
   var kidsGender = 0.obs;
 
   List<String> genderImage = [
@@ -28,13 +27,13 @@ class ProfileKidsView extends GetView<AuthiocationController> {
 
   List<String> genderTitle = [
     'ولد',
-    'بنات',
+    'بنت',
   ];
 
   @override
   Widget build(BuildContext context) {
     final _formKey = GlobalKey<FormState>();
-  
+
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
@@ -52,6 +51,13 @@ class ProfileKidsView extends GetView<AuthiocationController> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
+                      SizedBox(
+                        height: 20,
+                      ),
+                      SizedBox(
+                        child: Image.asset('asset/images/logo.png'),
+                        width: 100,
+                      ),
                       Text(
                         'أنشئ ملف طفلك',
                         style: headline3.copyWith(
@@ -71,6 +77,7 @@ class ProfileKidsView extends GetView<AuthiocationController> {
                           textAlign: TextAlign.center,
                         ),
                       ),
+                      /*
                       Obx(() {
                         return Row(
                           textDirection: TextDirection.rtl,
@@ -111,6 +118,7 @@ class ProfileKidsView extends GetView<AuthiocationController> {
                           ).toList(),
                         );
                       }),
+                    */
                     ],
                   ),
                 ),
@@ -221,13 +229,13 @@ class ProfileKidsView extends GetView<AuthiocationController> {
                                   Padding(
                                     padding: const EdgeInsets.all(8.0),
                                     child: Text(
-                                      'هل خضع لعمليات جراحية؟',
+                                      'لعمليات جراحية؟',
                                       style: headline2,
                                       textAlign: TextAlign.left,
                                     ),
                                   ),
                                   CustemBottomSheet(
-                                    label: 'هل خضع لعمليات جراحية؟',
+                                    label: 'لعمليات جراحية؟',
                                     dataList: surgery
                                         .map((e) => e['title'].toString())
                                         .toList(),
@@ -245,13 +253,13 @@ class ProfileKidsView extends GetView<AuthiocationController> {
                                   Padding(
                                     padding: const EdgeInsets.all(8.0),
                                     child: Text(
-                                      'هل يستعمل جبائر طبية؟',
+                                      'جبائر طبية؟',
                                       style: headline2,
                                       textAlign: TextAlign.left,
                                     ),
                                   ),
                                   CustemBottomSheet(
-                                    label: 'هل يستعمل جبائر طبية؟',
+                                    label: 'جبائر طبية؟',
                                     dataList: splints
                                         .map((e) => e['title'].toString())
                                         .toList(),
@@ -269,7 +277,7 @@ class ProfileKidsView extends GetView<AuthiocationController> {
                                   CustemCheckbox(
                                     checkboxText:
                                         'طفلي مولود قبل إكمال 37 اسبوع حمل',
-                                       // Checkboxdefaultvalue: controller?.beforeNineMonth?.value?? false,
+                                    // Checkboxdefaultvalue: controller?.beforeNineMonth?.value?? false,
                                     onChanged: (value) {
                                       /*
                                       print(value);

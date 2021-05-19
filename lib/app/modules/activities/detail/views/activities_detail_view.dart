@@ -1,15 +1,18 @@
+import 'package:eradah/app/data/component/CustemButton.dart';
 import 'package:eradah/app/data/helper/AppConstant.dart';
 import 'package:eradah/app/data/helper/showSnackBar.dart';
-import 'package:eradah/app/modules/activities/controllers/activities_controller.dart';
-import 'package:eradah/app/modules/activities/model/categoryvedioModel.dart';
-import 'package:eradah/app/modules/activities/views/activities_view.dart';
-import 'package:eradah/app/routes/app_pages.dart';
-import 'package:eradah/app/data/component/CustemButton.dart';
+import 'package:eradah/app/modules/activities/list/views/activities_list_view.dart';
 import 'package:flutter/material.dart';
+import 'package:eradah/app/modules/activities/model/categoryvedioModel.dart';
+
 import 'package:get/get.dart';
 
-class ActivitesListVideoView extends GetView {
-  ActivitiesController controller = Get.put(ActivitiesController());
+import '../controllers/activities_detail_controller.dart';
+
+class ActivitiesDetailView extends GetView<ActivitiesDetailController> {
+
+
+  ActivitiesDetailController controller = Get.put(ActivitiesDetailController());
 
   List<int> id_vedio = new List<int>.empty(growable: true);
 
@@ -50,7 +53,7 @@ class ActivitesListVideoView extends GetView {
                                 child: ListTile(
                                   title: Text(data.elementAt(index).title),
                                   subtitle:
-                                      Text(data.elementAt(index).category),
+                                      Text(data.elementAt(index).meta),
                                   leading:
                                       Image.asset('asset/images/image.jpg'),
                                   trailing: Obx(() {
@@ -104,4 +107,6 @@ class ActivitesListVideoView extends GetView {
       ),
     );
   }
+
+
 }

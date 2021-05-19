@@ -41,30 +41,7 @@ class SplashView extends GetView<AuthiocationController>  {
                 SizedBox(
                   height: 15,
                 ),
-                Center(
-                  child: RichText(
-                    text: TextSpan(
-                      text: '',
-                      children: [
-                        TextSpan(text: 'D', style: themeData.textTheme.headline6),
-                        TextSpan(text: 'r', style: themeData.textTheme.headline6),
-                        TextSpan(
-                          text: '.',
-                          style: themeData.textTheme.headline6
-                              .copyWith(color: Colors.black),
-                        ),
-                        TextSpan(
-                            text: 'Kids', style: themeData.textTheme.headline6),
-                        TextSpan(text: ' '),
-                        TextSpan(
-                          text: 'Taheal',
-                          style: themeData.textTheme.headline6
-                              .copyWith(color: Colors.black),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
+          
                 Center(
                   child: Text(
                     'kid’s developmental milestone',

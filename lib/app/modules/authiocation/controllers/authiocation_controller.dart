@@ -45,7 +45,7 @@ class AuthiocationController extends GetxController {
 
   @override
   void onInit() {
-    email.text = "atpfree@gmail.com";
+    email.text = "mohamed02@gmail.com";
     password.text = "123123";
     super.onInit();
   }
@@ -194,9 +194,6 @@ class AuthiocationController extends GetxController {
       var email = userlogModel.data.elementAt(0).email.toString();
       var accessToken = userlogModel.data.elementAt(0).accessToken.toString();
 
-print('xxxxxxxxxxxxxxxxxxxxxxxx');
-print(accessToken);
-print('xxxxxxxxxxxxxxxxxxxxxxxx');
 
       Get.find<UserAuth>().setUserToken(accessToken);
       Get.find<UserAuth>().setUserEmail(email);
@@ -206,7 +203,7 @@ print('xxxxxxxxxxxxxxxxxxxxxxxx');
         title: appName,
         message: '$firstName اهلا بك فى التطبيق',
         snackbarStatus: () {
-          Get.toNamed(Routes.HOME);
+          Get.toNamed(Routes.TRIAL);
         },
       );
     }

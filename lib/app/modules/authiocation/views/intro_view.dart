@@ -127,13 +127,21 @@ class IntroView extends GetView {
                   style: themeData.textTheme.headline1
                       .copyWith(fontWeight: FontWeight.bold),
                 ),
+             
                 SizedBox(
                   height: 20,
                 ),
                 Text(
-                  'DescriptionintroScreen1'.tr,
+                  'تؤثر الخبرات المبكرة لطفلك على نمو الجهاز العصبي و الجهاز العضلي الهيكلي ',
                   style: themeData.textTheme.subtitle1,
                   textAlign: TextAlign.center,
+                    maxLines: 1,
+                ),
+                    Text(
+                  'يوفر هذا التطبيق لجميع المعالم التنموية الحركية للأطفال في المستقبل',
+                  style: themeData.textTheme.subtitle1,
+                  textAlign: TextAlign.center,
+                  maxLines: 1,
                 ),
               ],
             ),

@@ -180,7 +180,7 @@ class ProfileUserView extends GetView<AuthiocationController> {
                                     // controller.s
                                   },
                                 );
-                              }),  SizedBox(
+                              },),  SizedBox(
                                 height: 10,
                               ),
                               CustomTextFormFiled(
@@ -204,6 +204,9 @@ class ProfileUserView extends GetView<AuthiocationController> {
                               SizedBox(
                                 height: 20,
                               ),
+
+
+/*
                               SizedBox(
                                 width: Get.width * .9,
                                 child: Text(
@@ -235,6 +238,7 @@ class ProfileUserView extends GetView<AuthiocationController> {
                                   ),
                                 ],
                               ),
+                         */
                             ],
                           ),
                         ),

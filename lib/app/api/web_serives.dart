@@ -1,3 +1,4 @@
+import 'package:eradah/app/modules/plan/list/controllers/plan_list_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:eradah/app/api/api_manger.dart';
@@ -91,6 +92,7 @@ class WebSerives {
       'add_my_plan',
       {'vedio': vedioid},
     );
+    PlanListController().getPlan();
     return responsModel;
   }
 

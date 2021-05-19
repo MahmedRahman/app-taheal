@@ -1,5 +1,5 @@
 import 'package:eradah/app/modules/acount/views/acount_view.dart';
-import 'package:eradah/app/modules/activities/views/activities_view.dart';
+import 'package:eradah/app/modules/activities/list/views/activities_list_view.dart';
 import 'package:eradah/app/modules/levels/list/views/levels_list_view.dart';
 import 'package:eradah/app/modules/plan/list/views/plan_list_view.dart';
 import 'package:eradah/app/data/helper/AppTheme.dart';
@@ -93,8 +93,10 @@ class HomeView extends GetView<HomeController> {
       body: Obx(() {
         return IndexedStack(index: selectindex.value, children: [
           PlanListView(),
-          ActivitiesView(),
-          LevelsListView(),
+          ActivitiesListView(),
+            
+           AcountView(),
+          //LevelsListView(),
           AcountView(),
         ]);
       }),

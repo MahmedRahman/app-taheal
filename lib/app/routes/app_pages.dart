@@ -2,9 +2,10 @@ import 'package:get/get.dart';
 
 import 'package:eradah/app/modules/acount/bindings/acount_binding.dart';
 import 'package:eradah/app/modules/acount/views/acount_view.dart';
-import 'package:eradah/app/modules/activities/bindings/activities_binding.dart';
-import 'package:eradah/app/modules/activities/views/activites_list_video_view.dart';
-import 'package:eradah/app/modules/activities/views/activities_view.dart';
+import 'package:eradah/app/modules/activities/detail/bindings/activities_detail_binding.dart';
+import 'package:eradah/app/modules/activities/detail/views/activities_detail_view.dart';
+import 'package:eradah/app/modules/activities/list/bindings/activities_list_binding.dart';
+import 'package:eradah/app/modules/activities/list/views/activities_list_view.dart';
 import 'package:eradah/app/modules/authiocation/bindings/authiocation_binding.dart';
 import 'package:eradah/app/modules/authiocation/views/authiocation_view.dart';
 import 'package:eradah/app/modules/authiocation/views/forgetpassword_view.dart';
@@ -28,6 +29,8 @@ import 'package:eradah/app/modules/plan/list/bindings/plan_list_binding.dart';
 import 'package:eradah/app/modules/plan/list/views/plan_list_view.dart';
 import 'package:eradah/app/modules/subscription/bindings/subscription_binding.dart';
 import 'package:eradah/app/modules/subscription/views/subscription_view.dart';
+import 'package:eradah/app/modules/trial/bindings/trial_binding.dart';
+import 'package:eradah/app/modules/trial/views/trial_view.dart';
 
 part 'app_routes.dart';
 
@@ -35,8 +38,7 @@ class AppPages {
   static const INITIAL = Routes.SplashView;
 
   static final routes = [
-
-     GetPage(
+    GetPage(
       name: Routes.HOME,
       page: () => HomeView(),
       binding: HomeBinding(),
@@ -77,22 +79,10 @@ class AppPages {
       binding: AuthiocationBinding(),
     ),
     GetPage(
-      name: Routes.ACTIVITIES,
-      page: () => ActivitiesView(),
-      binding: ActivitiesBinding(),
-    ),
-    GetPage(
-      name: Routes.ActivitesListVideoView,
-      page: () => ActivitesListVideoView(),
-      binding: ActivitiesBinding(),
-    ),
-   
-    GetPage(
       name: Routes.ACOUNT,
       page: () => AcountView(),
       binding: AcountBinding(),
     ),
-
     GetPage(
       name: Routes.ForgetpasswordView,
       page: () => ForgetpasswordView(),
@@ -108,8 +98,6 @@ class AppPages {
       page: () => ProfilekidsMotorView(),
       binding: AuthiocationBinding(),
     ),
- 
-
     GetPage(
       name: Routes.SUBSCRIPTION,
       page: () => SubscriptionView(),
@@ -129,6 +117,21 @@ class AppPages {
       name: Routes.LEVELS_DETAIL,
       page: () => LevelsDetailView(),
       binding: LevelsDetailBinding(),
+    ),
+    GetPage(
+      name: Routes.ACTIVITIES_LIST,
+      page: () => ActivitiesListView(),
+      binding: ActivitiesListBinding(),
+    ),
+    GetPage(
+      name: Routes.ACTIVITIES_DETAIL,
+      page: () => ActivitiesDetailView(),
+      binding: ActivitiesDetailBinding(),
+    ),
+    GetPage(
+      name: Routes.TRIAL,
+      page: () => TrialView(),
+      binding: TrialBinding(),
     ),
   ];
 }

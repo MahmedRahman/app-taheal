@@ -10,8 +10,13 @@ class PlanListController extends GetxController {
   var VedioComplateListFutter = Future.value().obs;
   var VedioNotComplateListFutter = Future.value().obs;
 
+  @override
+  void onInit() {
+    super.onInit();
+    getPlan();
+  }
 
-   getPlan() async {
+  getPlan() async {
     ResponsModel responsModel = await WebSerives().getPlan();
     if (responsModel.success) {
       Response response = responsModel.data;
@@ -30,7 +35,8 @@ class PlanListController extends GetxController {
       VedioComplateListFutter.value = Future.value(VedioComplateList);
       VedioNotComplateListFutter.value = Future.value(VedioNotComplateList);
 
- 
+      print(VedioComplateList.length);
+      print(VedioNotComplateList.length);
     }
   }
 
@@ -43,7 +49,9 @@ class PlanListController extends GetxController {
 
     if (responsModel.success) {
       Response response = responsModel.data;
-      print(response.body['success']);
+      if (response.body['success']) {
+        getPlan();
+      }
     }
   }
 
@@ -56,7 +64,9 @@ class PlanListController extends GetxController {
 
     if (responsModel.success) {
       Response response = responsModel.data;
-      print(response.body['success']);
+      if (response.body['success']) {
+        getPlan();
+      }
     }
   }
 }
