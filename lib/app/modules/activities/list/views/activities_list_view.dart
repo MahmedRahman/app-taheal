@@ -46,7 +46,9 @@ class ActivitiesListView extends GetView<ActivitiesListController> {
                             child: Center(
                               child: ListTile(
                                   onTap: () {
-                                    Get.toNamed(Routes.ActivitesListVideoView,
+                                    print('object');
+
+                                    Get.toNamed(Routes.ACTIVITIES_DETAIL,
                                         arguments: activatyModel.data
                                             .elementAt(index)
                                             .id
@@ -121,33 +123,31 @@ Container bulidSlider() {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-               SizedBox(height: 10,),
-                         Text(
-                          'تؤثر التجارب و الخبرات الحركية المبكرة لطفلك على تطورات بنية الجهاز العصبي و العضلي و الهيكلي',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                          ),
-                          textAlign: TextAlign.center,
-                        )
-                      
-                    ,
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Text(
+                      'تؤثر التجارب و الخبرات الحركية المبكرة لطفلك على تطورات بنية الجهاز العصبي و العضلي و الهيكلي',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
                     SizedBox(
                       height: 15,
                     ),
-                    Obx(
-                       () {
-                        return Text(
-                          'حافظ على تقدم ${KuserName.value} حتى الآن اضغط على أي مهارة لتحديث المستويات',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 12,
-                            fontWeight: FontWeight.w500,
-                          ),
-                          textAlign: TextAlign.center,
-                        );
-                      }
-                    ),
+                    Obx(() {
+                      return Text(
+                        'حافظ على تقدم ${KuserName.value} حتى الآن اضغط على أي مهارة لتحديث المستويات',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 12,
+                          fontWeight: FontWeight.w500,
+                        ),
+                        textAlign: TextAlign.center,
+                      );
+                    }),
                     SizedBox(
                       height: 15,
                     ),
