@@ -191,7 +191,7 @@ class AuthiocationController extends GetxController {
       Response response = responsModel.data;
       final userlogModel = userlogModelFromJson(response.bodyString);
 
-      var firstName = userlogModel.data.elementAt(0).firstName.toString();
+      var firstName = userlogModel.data.elementAt(0).childName.toString();
       var email = userlogModel.data.elementAt(0).email.toString();
       var accessToken = userlogModel.data.elementAt(0).accessToken.toString();
       KuserName.value  = firstName;

@@ -38,7 +38,9 @@ class CustemDatePicker extends StatelessWidget {
           DateTime date = await showDatePicker(
             context: context,
             initialDate: DateTime.now(),
-            firstDate: DateTime(1900),
+            firstDate: DateTime.now().subtract(const Duration(
+              days: 3285
+            )),
             lastDate:  DateTime.now(),
           );
           FocusScope.of(context).unfocus();

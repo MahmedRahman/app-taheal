@@ -77,31 +77,47 @@ class LevelsDetailView extends GetView<LevelsDetailController> {
                                           height: 10,
                                         ),
                                         SizedBox(
-                                            width: Get.width,
-                                            child: ElevatedButton(
-                                              style: ElevatedButton.styleFrom(
-                                                primary:
-                                                    question.complate == "1"
-                                                        ? Colors.grey
-                                                        : KprimaryColor,
-                                              ),
-                                              onPressed: () {
-                                                question.complate == "1"
-                                                    ? null
-                                                    : FocusScope.of(context)
-                                                        .unfocus();
-                                                controller
-                                                    .setQestion(question.id);
-                                              },
-                                              child: Text(
-                                                question.complate == "1"
-                                                    ? 'مكتمل'
-                                                    : 'اكتمل؟',
-                                                style: TextStyle(
-                                                    fontWeight:
-                                                        FontWeight.bold),
-                                              ),
-                                            ))
+                                          width: Get.width,
+                                          child: ElevatedButton(
+                                            style: ElevatedButton.styleFrom(
+                                              primary: KprimaryColor,
+                                            ),
+                                            onPressed: () {
+                                           
+                                              Get.back();
+                                            },
+                                            child: Text(
+                                              'حفظ ورجوع',
+                                              style: TextStyle(
+                                                  fontWeight: FontWeight.bold),
+                                            ),
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          width: Get.width,
+                                          child: ElevatedButton(
+                                            style: ElevatedButton.styleFrom(
+                                              primary: question.complate == "1"
+                                                  ? Colors.grey
+                                                  : KprimaryColor,
+                                            ),
+                                            onPressed: () {
+                                              question.complate == "1"
+                                                  ? null
+                                                  : FocusScope.of(context)
+                                                      .unfocus();
+                                              controller
+                                                  .setQestion(question.id);
+                                            },
+                                            child: Text(
+                                              question.complate == "1"
+                                                  ? 'مكتمل'
+                                                  : 'اكتمل؟',
+                                              style: TextStyle(
+                                                  fontWeight: FontWeight.bold),
+                                            ),
+                                          ),
+                                        )
                                       ],
                                     ),
                                   ),

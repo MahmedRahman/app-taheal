@@ -1,6 +1,6 @@
 var ListKidsGender = [
   {"id": 0, "name": "ولد"},
-  {"id": 1, "name": "بنات"},
+  {"id": 1, "name": "بنت"},
 ];
 
 var ListRlationShip = [

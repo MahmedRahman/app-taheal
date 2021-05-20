@@ -9,7 +9,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
-
 class ProfilekidsMotorView extends GetView<AuthiocationController> {
   List<String> CategoryList;
 
@@ -17,9 +16,8 @@ class ProfilekidsMotorView extends GetView<AuthiocationController> {
 
   @override
   Widget build(BuildContext context) {
-
     print(selectkidsMotor.value == '0');
-    
+
     CategoryList = [
       'asset/category/01.svg',
       'asset/category/02.svg',
@@ -37,7 +35,7 @@ class ProfilekidsMotorView extends GetView<AuthiocationController> {
             AuthiocationHeader(
               title: 'اختر الوظيفة الحركية الإجمالية لطفلك بناء على',
               subTitle:
-                  'درجة أتزانه وأنماط حركته وحالة مفاصله وحالة الجهاز العضلي الحركي',
+                  'صفحة الوظائف الحركية تكون اختر الوظيفة الحركية الاجمالية لطفلك',
             ),
             Obx(() {
               return Container(
@@ -47,27 +45,34 @@ class ProfilekidsMotorView extends GetView<AuthiocationController> {
                     height: Get.height * .70,
                     child: GridView.count(
                       crossAxisCount: 2,
-                      children: List.generate(MotorFunctions.length, (index) {
-
-
-                        return InkWell(
-                          onTap: () {
-                            print(MotorFunctions.elementAt(index)['id'].toString());
-                            selectkidsMotor.value = index.toString();
-                            controller.motorFunction.value = int.parse(MotorFunctions.elementAt(index)['id']) ;
-                          },
-                          child: Card(
-                            color: selectkidsMotor.value == index.toString()
-                                ? Colors.grey
-                                : Colors.white,
-                            child: Padding(
-                              padding: const EdgeInsets.all(25),
-                              child:CustomImageCached(imageUrl: MotorFunctions.elementAt(index)['image']
-                                      .toString()),
+                      children: List.generate(
+                        MotorFunctions.length,
+                        (index) {
+                          return InkWell(
+                            onTap: () {
+                              print(MotorFunctions.elementAt(index)['id']
+                                  .toString());
+                              selectkidsMotor.value = index.toString();
+                              controller.motorFunction.value = int.parse(
+                                MotorFunctions.elementAt(index)['id'],
+                              );
+                            },
+                            child: Card(
+                              color: selectkidsMotor.value == index.toString()
+                                  ? KprimaryColor
+                                  : Colors.white,
+                              child: Padding(
+                                padding: const EdgeInsets.all(25),
+                                child: CustomImageCached(
+                                  imageUrl:
+                                      MotorFunctions.elementAt(index)['image']
+                                          .toString(),
+                                ),
+                              ),
                             ),
-                          ),
-                        );
-                      }),
+                          );
+                        },
+                      ),
                     ),
                   ),
                 ),
@@ -81,7 +86,6 @@ class ProfilekidsMotorView extends GetView<AuthiocationController> {
                   child: CustemButton(
                     buttonText: 'Next'.tr,
                     onPressed: () {
-
                       print('User Profile');
 
                       print('first_name');
@@ -115,9 +119,6 @@ class ProfilekidsMotorView extends GetView<AuthiocationController> {
                       print(controller.motorFunction.value);
 
                       controller.createUser();
-
-
-
                     },
                   ),
                 ),

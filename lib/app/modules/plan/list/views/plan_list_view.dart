@@ -22,11 +22,14 @@ class PlanListView extends GetView<PlanListController> {
   Widget build(BuildContext context) {
     PlanListController controller = Get.put(PlanListController());
 
- 
-
     return ListView(
       children: [
-        bulidSlider(),
+        InkWell(
+          onTap: (){
+            Get.toNamed(Routes.SUBSCRIPTION);
+          },
+          child: Image.asset('asset/images/baner.png'),
+        ),
         Obx(() {
           return Row(
             children: [
@@ -39,10 +42,7 @@ class PlanListView extends GetView<PlanListController> {
                     },
                     child: Column(
                       children: [
-                        Icon(
-                          Icons.history_edu,
-                          color: isSelect.value ? Colors.white : KprimaryColor,
-                        ),
+                        SvgPicture.asset('asset/images/calendar1.svg'),
                         SizedBox(
                           height: 10,
                         ),
@@ -68,10 +68,7 @@ class PlanListView extends GetView<PlanListController> {
                     },
                     child: Column(
                       children: [
-                        Icon(
-                          Icons.history,
-                          color: isSelect.value ? KprimaryColor : Colors.white,
-                        ),
+                        SvgPicture.asset('asset/images/calendar2.svg'),
                         SizedBox(
                           height: 10,
                         ),
@@ -136,7 +133,7 @@ class listVideo extends GetView<PlanListController> {
   }
 
   Card cardPlanItem(BuildContext context, MyVedio myVedio, controller) {
-    SvgPicture IconRate = SvgPicture.asset(
+    Widget IconRate = SvgPicture.asset(
       'asset/images/dislike.svg',
       width: 64,
     );
@@ -152,9 +149,79 @@ class listVideo extends GetView<PlanListController> {
         width: 64,
       );
     } else {
-      IconRate = SvgPicture.asset(
-        'asset/images/sub4.svg',
-        width: 64,
+      IconRate = InkWell(
+        onTap: () {
+          Get.defaultDialog(
+            title: 'ساعدنا في وضع خطة أفضل لك ولطفلك',
+            titleStyle: TextStyle(
+              fontWeight: FontWeight.bold,
+              color: KprimaryColor,
+              fontFamily: 'cairo',
+              fontSize: 14,
+            ),
+            content: Column(
+              children: [
+                Text(
+                  'هل استمتع طفلك بهذا النشاط',
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    InkWell(
+                      onTap: () {
+                        Get.back();
+                        controller.setRate(
+                          vedioid: myVedio.id,
+                          rate: 1,
+                        );
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.all(15),
+                        child: Container(
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                          ),
+                          child: SvgPicture.asset(
+                            'asset/images/like.svg',
+                            width: 64,
+                          ),
+                        ),
+                      ),
+                    ),
+                    InkWell(
+                      onTap: () {
+                        Get.back();
+                        controller.setRate(
+                          vedioid: myVedio.id,
+                          rate: 0,
+                        );
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.all(15),
+                        child: Container(
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                          ),
+                          child: SvgPicture.asset(
+                            'asset/images/dislike.svg',
+                            width: 64,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                )
+              ],
+            ),
+          );
+        },
+        child: SvgPicture.asset(
+          'asset/images/rate2.svg',
+          width: 64,
+        ),
       );
     }
 
@@ -230,158 +297,75 @@ class listVideo extends GetView<PlanListController> {
                 ),
               ],
             ),
-            Directionality(
-              textDirection: TextDirection.ltr,
-              child: ElevatedButton.icon(
-                style: ElevatedButton.styleFrom(primary: KprimaryColor),
-                onPressed: () {
-                  showSnackBar(
-                    title: appName,
-                    message:
-                        'تم الانتهاء من عمل النشاط اللزم وسيتنقل الى الانشطة السابقة',
-                    snackbarStatus: () {
-                      controller.setCommplate(vedioid: myVedio.id, omplate: 1);
-                    },
-                  );
-                },
-                label: Text(
-                  'وضع علامة على النشاط على أنه مكتمل',
-                ),
-                icon: Icon(Icons.done_all),
-              ),
+            SizedBox(
+              height: 10,
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 25),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Expanded(
-                    child: Directionality(
-                      textDirection: TextDirection.ltr,
-                      child: ElevatedButton.icon(
-                        style: ElevatedButton.styleFrom(primary: KprimaryColor),
-                        onPressed: () {
-                          Get.defaultDialog(
-                            title: myVedio.title,
-                            titleStyle: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: KprimaryColor,
-                              fontFamily: 'cairo',
-                              fontSize: 20,
-                            ),
-                            content: Directionality(
-                              textDirection: TextDirection.rtl,
-                              child: SizedBox(
-                                height: 200,
-                                child: SingleChildScrollView(
-                                  child: Html(
-                                    data: myVedio.details,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          );
-                        },
-                        label: Text('الوصف'),
-                        icon: Icon(Icons.read_more),
+              child: SizedBox(
+                width: double.infinity,
+                child: Directionality(
+                  textDirection: TextDirection.ltr,
+                  child: Container(
+                    height: 50,
+                    child: ElevatedButton.icon(
+                      style: ElevatedButton.styleFrom(primary: KprimaryColor),
+                      onPressed: () {
+                        showSnackBar(
+                          title: appName,
+                          message:
+                              'تم الانتهاء من عمل النشاط اللزم وسيتنقل الى الانشطة السابقة',
+                          snackbarStatus: () {
+                            controller.setCommplate(
+                                vedioid: myVedio.id, omplate: 1);
+                          },
+                        );
+                      },
+                      label: Text(
+                        'وضع علامة على النشاط على أنه مكتمل',
+                        style: TextStyle(fontSize: 12),
                       ),
+                      icon: Icon(Icons.done_all),
                     ),
                   ),
-                  SizedBox(
-                    width: 10,
-                  ),
-                  Expanded(
-                    child: Directionality(
-                      textDirection: TextDirection.ltr,
-                      child: ElevatedButton.icon(
-                        style: ElevatedButton.styleFrom(primary: KprimaryColor),
-                        onPressed: () {
-                          Get.defaultDialog(
-                            title: 'ساعدنا في وضع خطة أفضل لك ولطفلك',
-                            titleStyle: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: KprimaryColor,
-                              fontFamily: 'cairo',
-                              fontSize: 14,
-                            ),
-                            content: Column(
-                              children: [
-                                Text(
-                                  'هل استمتع طفلك بهذا النشاط',
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    InkWell(
-                                      onTap: () {
-                                        Get.back();
-                                        showSnackBar(
-                                          title: appName,
-                                          message: 'تم تقيم الفيديو',
-                                          snackbarStatus: () {
-                                            controller.setRate(
-                                              vedioid: myVedio.id,
-                                              rate: 1,
-                                            );
-                                          },
-                                        );
-                                      },
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(15),
-                                        child: Container(
-                                          decoration: BoxDecoration(
-                                            shape: BoxShape.circle,
-                                          ),
-                                          child: SvgPicture.asset(
-                                            'asset/images/like.svg',
-                                            width: 64,
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                    InkWell(
-                                      onTap: () {
-                                        Get.back();
-                                        showSnackBar(
-                                          title: appName,
-                                          message: 'تم تقيم الفيديو',
-                                          snackbarStatus: () {
-                                            controller.setRate(
-                                              vedioid: myVedio.id,
-                                              rate: 0,
-                                            );
-                                          },
-                                        );
-                                      },
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(15),
-                                        child: Container(
-                                          decoration: BoxDecoration(
-                                            shape: BoxShape.circle,
-                                          ),
-                                          child: SvgPicture.asset(
-                                            'asset/images/dislike.svg',
-                                            width: 64,
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                )
-                              ],
-                            ),
-                          );
-                        },
-                        label: Text('تقييم'),
-                        icon: Icon(Icons.rate_review),
+                ),
+              ),
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 25),
+              child: SizedBox(
+                width: Get.width,
+                height: 50,
+                child: ElevatedButton.icon(
+                  style: ElevatedButton.styleFrom(primary: KscandColor),
+                  onPressed: () {
+                    Get.defaultDialog(
+                      title: myVedio.title,
+                      titleStyle: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: KprimaryColor,
+                        fontFamily: 'cairo',
+                        fontSize: 20,
                       ),
-                    ),
-                  )
-                ],
+                      content: Directionality(
+                        textDirection: TextDirection.rtl,
+                        child: SizedBox(
+                          height: 200,
+                          child: SingleChildScrollView(
+                            child: Html(
+                              data: myVedio.details,
+                            ),
+                          ),
+                        ),
+                      ),
+                    );
+                  },
+                  label: Text('الوصف'),
+                  icon: Icon(Icons.read_more),
+                ),
               ),
             ),
             SizedBox(
