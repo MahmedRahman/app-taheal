@@ -64,6 +64,7 @@ class MyVedio {
         this.descCat,
         this.vedio,
         this.img,
+        this.color,
     });
 
     int id;
@@ -76,6 +77,7 @@ class MyVedio {
     String descCat;
     String vedio;
     String img;
+ String color;
 
     factory MyVedio.fromJson(Map<String, dynamic> json) => MyVedio(
         id: json["id"],
@@ -88,6 +90,7 @@ class MyVedio {
         descCat: json["desc_cat"]== null ? '' : json["desc_cat"],
         vedio: json["vedio"]== null ? '' : json["vedio"],
         img: json["img"]== null ? '' : json["img"],
+        color: json["color"]== null ? '' : json["color"],
     );
 
     Map<String, dynamic> toJson() => {
@@ -100,6 +103,6 @@ class MyVedio {
         "cat_title": catTitle,
         "desc_cat": descCat,
         "vedio": vedio,
-        "img": img,
+        "img": img, "color": color,
     };
 }

@@ -1,6 +1,7 @@
 import 'package:eradah/app/api/response_model.dart';
 import 'package:eradah/app/api/web_serives.dart';
 import 'package:eradah/app/modules/activities/model/categoryvedioModel.dart';
+import 'package:eradah/app/modules/plan/list/controllers/plan_list_controller.dart';
 import 'package:eradah/app/routes/app_pages.dart';
 import 'package:get/get.dart';
 
@@ -32,6 +33,9 @@ Future vedioCategories(String vedios_cat_id) async {
         Response response = responsModel.data;
         if (response.body['success']) {
           Get.toNamed(Routes.HOME);
+          final PlanListController c = Get.find();
+          c.getPlan();
+          
         }
       }
     }

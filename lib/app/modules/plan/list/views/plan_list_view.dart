@@ -241,6 +241,8 @@ class listVideo extends GetView<PlanListController> {
         },
         child: Column(
           children: [
+            Divider(height: 5,thickness: 5,color: Color(HexColorFormString().getColorFromHex(
+                                  myVedio.color)),),
             Directionality(
               textDirection: TextDirection.rtl,
               child: ListTile(
@@ -252,15 +254,18 @@ class listVideo extends GetView<PlanListController> {
                     height: 32,
                     child: SvgPicture.asset(
                       'asset/images/sign.svg',
+                      color: Color(HexColorFormString().getColorFromHex(
+                                  myVedio.color)),
                     ),
                   ),
                 ),
                 trailing: IconRate,
                 title: Text(
-                  myVedio.title,
+                  '${myVedio.title} ',
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
-                    color: KprimaryColor,
+                    color: Color(HexColorFormString().getColorFromHex(
+                                  myVedio.color)),
                   ),
                 ),
                 subtitle: Text(

@@ -21,10 +21,14 @@ class PlanListController extends GetxController {
     if (responsModel.success) {
       Response response = responsModel.data;
       final videoPlanModel = videoPlanModelFromJson(response.bodyString);
+
       List<MyVedio> VedioList = [
         ...videoPlanModel.data.vediosMotorFunction,
         ...videoPlanModel.data.myVedio
       ];
+print(videoPlanModel.data.vediosMotorFunction.length);
+print(videoPlanModel.data.myVedio.length);
+      print(VedioList.length);
 
       List<MyVedio> VedioComplateList =
           VedioList.where((element) => element.complate == "1").toList();
