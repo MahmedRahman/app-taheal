@@ -22,7 +22,7 @@ class PlanListView extends GetView<PlanListController> {
   Widget build(BuildContext context) {
     PlanListController controller = Get.put(PlanListController());
 
-    //controller.getPlan();
+ 
 
     return ListView(
       children: [

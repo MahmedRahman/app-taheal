@@ -1,3 +1,4 @@
+import 'package:eradah/app/data/helper/AppConstant.dart';
 import 'package:eradah/app/data/helper/AppTheme.dart';
 import 'package:eradah/app/modules/activities/list/model/ActivatyModel.dart';
 import 'package:eradah/app/routes/app_pages.dart';
@@ -120,25 +121,32 @@ Container bulidSlider() {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-                    Text(
-                      'اختر المهارات المناسبة لمعاذ لتتأكد من طرق التحسين',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                      ),
-                      textAlign: TextAlign.center,
-                    ),
+               SizedBox(height: 10,),
+                         Text(
+                          'تؤثر التجارب و الخبرات الحركية المبكرة لطفلك على تطورات بنية الجهاز العصبي و العضلي و الهيكلي',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                          ),
+                          textAlign: TextAlign.center,
+                        )
+                      
+                    ,
                     SizedBox(
                       height: 15,
                     ),
-                    Text(
-                      'حافظ على تقدم معاذ حتى الآن اضغط على أي مهارة لتحديث المستويات',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 12,
-                        fontWeight: FontWeight.w500,
-                      ),
-                      textAlign: TextAlign.center,
+                    Obx(
+                       () {
+                        return Text(
+                          'حافظ على تقدم ${KuserName.value} حتى الآن اضغط على أي مهارة لتحديث المستويات',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 12,
+                            fontWeight: FontWeight.w500,
+                          ),
+                          textAlign: TextAlign.center,
+                        );
+                      }
                     ),
                     SizedBox(
                       height: 15,
@@ -146,7 +154,7 @@ Container bulidSlider() {
                     ElevatedButton(
                       child: Text('اشترك الان'),
                       onPressed: () {
-                        print('object');
+                        Get.toNamed(Routes.SUBSCRIPTION);
                       },
                       style:
                           ElevatedButton.styleFrom(primary: Color(0xff7ED134)),

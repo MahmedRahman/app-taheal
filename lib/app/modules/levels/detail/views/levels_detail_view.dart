@@ -80,8 +80,10 @@ class LevelsDetailView extends GetView<LevelsDetailController> {
                                             width: Get.width,
                                             child: ElevatedButton(
                                               style: ElevatedButton.styleFrom(
-                                                primary: question.complate == "1"
-                                                    ? Colors.grey :KprimaryColor,
+                                                primary:
+                                                    question.complate == "1"
+                                                        ? Colors.grey
+                                                        : KprimaryColor,
                                               ),
                                               onPressed: () {
                                                 question.complate == "1"
@@ -111,7 +113,9 @@ class LevelsDetailView extends GetView<LevelsDetailController> {
                       ],
                     );
                   }
-                  return CircularProgressIndicator();
+                  return Center(
+                    child: CircularProgressIndicator(),
+                  );
                 });
           }),
     );

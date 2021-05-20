@@ -46,17 +46,10 @@ class ProfilekidsMotorView extends GetView<AuthiocationController> {
                   child: Container(
                     height: Get.height * .70,
                     child: GridView.count(
-                      // Create a grid with 2 columns. If you change the scrollDirection to
-                      // horizontal, this produces 2 rows.
                       crossAxisCount: 2,
-                      // Generate 100 widgets that display their index in the List.
                       children: List.generate(MotorFunctions.length, (index) {
 
-/*
-                        if(index==1){
-controller.motorFunction.value = int.parse(MotorFunctions.first['id']) ;
-                        }
-                        */
+
                         return InkWell(
                           onTap: () {
                             print(MotorFunctions.elementAt(index)['id'].toString());

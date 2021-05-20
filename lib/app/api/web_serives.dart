@@ -47,25 +47,25 @@ class WebSerives {
 
     ResponsModel responsModel = await APIManger().repPost(
       'register',
-      {
-      'first_name': firstName,
-      'last_name': lastName,
-      'email': email,
-      'password': password,
-      'password_confirmation': password,
-      'phone': phone,
-      'child_name': childName,
-      'child_gender': childGender,
-      'relation_child': relationChild,
-      'motor_function': motorFunction,
-      'child_birthday': childBirthday,
-      'before_nine_month': beforeNineMonth,
-      'diagnostics': diagnostics,
-      'surgeries': surgeries,
-      'medical_splints': medicalSplints,
-      // 'image': MultipartFile(file, filename: 'aa.jpg')
-      //'image': MultipartFile(file,filename: 'aa.jpg'),
-    },
+      body: {
+        'first_name': firstName,
+        'last_name': lastName,
+        'email': email,
+        'password': password,
+        'password_confirmation': password,
+        'phone': phone,
+        'child_name': childName,
+        'child_gender': childGender,
+        'relation_child': relationChild,
+        'motor_function': motorFunction,
+        'child_birthday': childBirthday,
+        'before_nine_month': beforeNineMonth,
+        'diagnostics': diagnostics,
+        'surgeries': surgeries,
+        'medical_splints': medicalSplints,
+        // 'image': MultipartFile(file, filename: 'aa.jpg')
+        //'image': MultipartFile(file,filename: 'aa.jpg'),
+      },
     );
     return responsModel;
   }
@@ -78,7 +78,7 @@ class WebSerives {
 
     ResponsModel responsModel = await APIManger().repPost(
       'login',
-      {
+      body: {
         'email': email,
         'password': password,
       },
@@ -88,17 +88,15 @@ class WebSerives {
   }
 
   Future addVideoToMyPlan({@required String vedioid}) async {
-    ResponsModel responsModel = await APIManger().repPost(
-      'add_my_plan',
-      {'vedio': vedioid},
-    );
+    ResponsModel responsModel = await APIManger()
+        .repPost('add_my_plan', body: {'vedio': vedioid}, showLoading: true);
     PlanListController().getPlan();
     return responsModel;
   }
 
   Future setRate({@required int vedioid, @required int rate}) async {
-    ResponsModel responsModel =
-        await APIManger().repPost('Rate', {'rate': rate, 'vedio': vedioid});
+    ResponsModel responsModel = await APIManger().repPost('Rate',
+        body: {'rate': rate, 'vedio': vedioid}, showLoading: true);
     return responsModel;
   }
 
@@ -116,15 +114,20 @@ class WebSerives {
   Future setQuetionComplate(
       {@required int quetionsid, int complateStaus}) async {
     ResponsModel responsModel = await APIManger().repPost(
-        'complate_quetion', {'complate': complateStaus, 'quetion': quetionsid});
+      'complate_quetion',
+      body: {'complate': complateStaus, 'quetion': quetionsid},
+      showLoading: true,
+    );
     return responsModel;
   }
 
   Future setViedoComplate({@required int vedioid, int complateStaus}) async {
-    ResponsModel responsModel = await APIManger().repPost('complate_vedio', {
-      'complate': complateStaus,
-      'vedio': vedioid,
-    });
+    ResponsModel responsModel = await APIManger().repPost('complate_vedio',
+        body: {
+          'complate': complateStaus,
+          'vedio': vedioid,
+        },
+        showLoading: true);
     return responsModel;
   }
 }

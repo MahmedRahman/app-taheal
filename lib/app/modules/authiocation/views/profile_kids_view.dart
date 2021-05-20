@@ -312,9 +312,9 @@ class ProfileKidsView extends GetView<AuthiocationController> {
                                 validate = false;
                               }
 
-                              if (controller.diagnostics.value == '' ||
-                                  controller.surgerySelect.value == '' ||
-                                  controller.medicalSplints.value == '') {
+                              if (controller.diagnostics.value == 0 ||
+                                  controller.surgerySelect.value == 0 ||
+                                  controller.medicalSplints.value == 0) {
                                 showSnackBar(
                                     title: appName,
                                     message:

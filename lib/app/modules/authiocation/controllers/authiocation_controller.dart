@@ -133,6 +133,7 @@ class AuthiocationController extends GetxController {
       if (Get.find<UserAuth>().getUserToken() == null) {
         Get.toNamed(Routes.IntroView);
       } else {
+        KuserName.value = Get.find<UserAuth>().getUserName();
         Get.toNamed(Routes.HOME);
       }
     }
@@ -193,7 +194,7 @@ class AuthiocationController extends GetxController {
       var firstName = userlogModel.data.elementAt(0).firstName.toString();
       var email = userlogModel.data.elementAt(0).email.toString();
       var accessToken = userlogModel.data.elementAt(0).accessToken.toString();
-
+      KuserName.value  = firstName;
 
       Get.find<UserAuth>().setUserToken(accessToken);
       Get.find<UserAuth>().setUserEmail(email);

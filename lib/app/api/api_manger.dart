@@ -4,8 +4,10 @@ import 'package:eradah/app/api/response_model.dart';
 import 'package:eradah/app/routes/app_pages.dart';
 import 'package:eradah/auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:get/get_connect/connect.dart';
+import 'package:lottie/lottie.dart';
 
 String baes_url = 'https://matrix-clouds.com/erada_kids/public/api/';
 String api_key = 'mwDA9w';
@@ -23,7 +25,6 @@ class APIManger extends GetConnect {
   void login() {
     String tokan = Get.find<UserAuth>().getUserToken();
 
-
     if (tokan != null) {
       header.update(
         'Authorization',
@@ -34,15 +35,32 @@ class APIManger extends GetConnect {
     }
   }
 
-  Future<ResponsModel> repPost(url, body) async {
-    print("Api Request " + baes_url + url);
+  Future<ResponsModel> repPost(url, {body, bool showLoading = false}) async {
+    if (showLoading) {
+      EasyLoading.show(
+        status: 'جارى التحميل',
+        maskType: EasyLoadingMaskType.black,
+        indicator: CircleAvatar(
+          backgroundColor: Colors.black,
+          radius: 40,
+          child: LottieBuilder.asset('asset/images/loading.json'),
+        ),
+      );
+    }
+
     login();
 
     Response response = await post(baes_url + url, body, headers: header);
-    print("Api Request " + baes_url + url + response.statusCode.toString());
+
+    print("Api Request $baes_url$url ${response.statusCode} ");
+
     try {
       switch (response.statusCode) {
         case 200:
+          if (showLoading) {
+            EasyLoading.showSuccess('Done');
+          }
+
           return ResponsModel(
             code: response.statusCode,
             success: true,
@@ -50,17 +68,11 @@ class APIManger extends GetConnect {
           );
           break;
 
-        case 401:
-          Get.toNamed(Routes.SigninView);
-
-          return ResponsModel(
-            code: response.statusCode,
-            success: false,
-          );
-
-          break;
-
         default:
+          if (showLoading) {
+            EasyLoading.showError('Error');
+          }
+
           Get.to(ErrorView(
             api_url: url.toString(),
             api_body: body.toString(),
@@ -73,6 +85,10 @@ class APIManger extends GetConnect {
           );
       }
     } catch (e) {
+      if (showLoading) {
+        EasyLoading.showError('Error');
+      }
+
       Get.to(ErrorView(
         api_url: response.headers.toString(),
         api_body: e.toString(),
@@ -86,10 +102,27 @@ class APIManger extends GetConnect {
     }
   }
 
-  Future<ResponsModel> repGet(url) async {
+  Future<ResponsModel> repGet(url, {bool showLoading = false}) async {
+    if (showLoading) {
+      EasyLoading.show(
+        status: 'جارى التحميل',
+        maskType: EasyLoadingMaskType.black,
+        indicator: CircleAvatar(
+          backgroundColor: Colors.black,
+          radius: 40,
+          child: LottieBuilder.asset('asset/images/loading.json'),
+        ),
+      );
+    }
+
     print("Api Request " + baes_url + url);
     login();
-    Response response = await get(baes_url + url, headers: header);
+    Response response;
+    if (GetUtils.isURL(url)) {
+      response = await get(url, headers: header);
+    } else {
+      response = await get(baes_url + url, headers: header);
+    }
 
     print("Api Request " +
         baes_url +
@@ -100,6 +133,9 @@ class APIManger extends GetConnect {
     try {
       switch (response.statusCode) {
         case 200:
+          if (showLoading) {
+            EasyLoading.showSuccess('Done');
+          }
           return ResponsModel(
             code: response.statusCode,
             success: true,
@@ -107,29 +143,27 @@ class APIManger extends GetConnect {
           );
           break;
 
-        case 401:
-          Get.toNamed(Routes.SigninView);
-
-          return ResponsModel(
-            code: response.statusCode,
-            success: false,
-          );
-
-          break;
-
         default:
-          Get.to(ErrorView(
-            api_url: url.toString(),
-            api_body: '',
-            api_header: header.toString(),
-            api_status_code: response.statusCode.toString(),
-          ));
+          if (showLoading) {
+            EasyLoading.showError('Erro');
+          }
+          Get.to(
+            ErrorView(
+              api_url: url.toString(),
+              api_body: '',
+              api_header: header.toString(),
+              api_status_code: response.statusCode.toString(),
+            ),
+          );
           return ResponsModel(
             code: response.statusCode,
             success: false,
           );
       }
     } catch (e) {
+      if (showLoading) {
+        EasyLoading.showError('Erro');
+      }
       Get.to(ErrorView(
         api_url: response.headers.toString(),
         api_body: e.toString(),
