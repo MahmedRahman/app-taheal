@@ -13,11 +13,16 @@ class LevelsListController extends GetxController {
 
   getLevels() async {
     ResponsModel responsModel = await WebSerives().getQuetionsCategory();
+
     if (responsModel.success) {
       Response response = responsModel.data;
       final quetionsCategoryModel =
           quetionsCategoryModelFromJson(response.bodyString);
+
       return quetionsCategoryModel.data;
     }
+//
+
+
   }
 }

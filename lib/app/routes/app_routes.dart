@@ -29,4 +29,5 @@ abstract class Routes {
   static const ACTIVITIES_LIST = '/activities/list';
   static const ACTIVITIES_DETAIL = '/activities/detail';
   static const TRIAL = '/trial';
+  static const SUBSCRIPATION_PAGE = '/subscripation-page';
 }

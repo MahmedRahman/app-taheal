@@ -55,7 +55,7 @@ class ProfileUserView extends GetView<AuthiocationController> {
                     Container(
                       width: Get.width,
                       child: Text(
-                        'أنشئ ملف الشخصى',
+                        'أنشئ ملف الشخصي',
                         style: headline3.copyWith(
                           fontSize: 16,
                           fontFamily: 'cairo',
@@ -67,7 +67,7 @@ class ProfileUserView extends GetView<AuthiocationController> {
                     SizedBox(
                       height: 20,
                     ),
-                    Text(
+                    /*Text(
                       'ساعدنا في تخصص برنامجك وفقا لإحتياجات طفلك من خلال مشاركة بعض المعلومات الأساسية ',
                       style: headline3.copyWith(
                         fontSize: 14,
@@ -75,7 +75,7 @@ class ProfileUserView extends GetView<AuthiocationController> {
                         fontFamily: 'cairo',
                       ),
                       textAlign: TextAlign.center,
-                    ),
+                    ),*/
                     SizedBox(
                       height: 20,
                     ),

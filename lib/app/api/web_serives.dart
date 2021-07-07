@@ -76,18 +76,18 @@ class WebSerives {
   }) async {
     // final data = FormData();
 
-    ResponsModel responsModel = await APIManger().repPost(
-      'login',
-      body: {
-        'email': email,
-        'password': password,
-      },showLoading: true
-    );
+    ResponsModel responsModel = await APIManger().repPost('login',
+        body: {
+          'email': email,
+          'password': password,
+        },
+        showLoading: true);
 
     return responsModel;
   }
 
   Future addVideoToMyPlan({@required String vedioid}) async {
+    print(vedioid);
     ResponsModel responsModel = await APIManger()
         .repPost('add_my_plan', body: {'vedio': vedioid}, showLoading: true);
     PlanListController().getPlan();
@@ -105,14 +105,32 @@ class WebSerives {
     return responsModel;
   }
 
-  Future getQuetionsCategoryDetailes({@required int quetionsid}) async {
+  Future getMyBackage() async {
+    ResponsModel responsModel = await APIManger().repGet('my_backage');
+    return responsModel;
+  }
+
+  Future setSendBackage({@required int backage}) async {
+    ResponsModel responsModel = await APIManger().repPost(
+      'send_backage',
+      body: {'backage': backage},
+      showLoading: true,
+    );
+    return responsModel;
+  }
+
+  Future getQuetionsCategoryDetailes({
+    @required int quetionsid,
+  }) async {
     ResponsModel responsModel =
         await APIManger().repGet('quetions/' + quetionsid.toString());
     return responsModel;
   }
 
-  Future setQuetionComplate(
-      {@required int quetionsid, int complateStaus}) async {
+  Future setQuetionComplate({
+    @required int quetionsid,
+    int complateStaus,
+  }) async {
     ResponsModel responsModel = await APIManger().repPost(
       'complate_quetion',
       body: {'complate': complateStaus, 'quetion': quetionsid},
@@ -121,7 +139,10 @@ class WebSerives {
     return responsModel;
   }
 
-  Future setViedoComplate({@required int vedioid, int complateStaus}) async {
+  Future setViedoComplate({
+    @required int vedioid,
+    int complateStaus,
+  }) async {
     ResponsModel responsModel = await APIManger().repPost('complate_vedio',
         body: {
           'complate': complateStaus,

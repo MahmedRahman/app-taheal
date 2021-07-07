@@ -23,10 +23,10 @@ import 'package:eradah/app/modules/levels/detail/bindings/levels_detail_binding.
 import 'package:eradah/app/modules/levels/detail/views/levels_detail_view.dart';
 import 'package:eradah/app/modules/levels/list/bindings/levels_list_binding.dart';
 import 'package:eradah/app/modules/levels/list/views/levels_list_view.dart';
-import 'package:eradah/app/modules/plan/detail/bindings/plan_detail_binding.dart';
-import 'package:eradah/app/modules/plan/detail/views/plan_detail_view.dart';
 import 'package:eradah/app/modules/plan/list/bindings/plan_list_binding.dart';
 import 'package:eradah/app/modules/plan/list/views/plan_list_view.dart';
+import 'package:eradah/app/modules/subscripation_page/bindings/subscripation_page_binding.dart';
+import 'package:eradah/app/modules/subscripation_page/views/subscripation_page_view.dart';
 import 'package:eradah/app/modules/subscription/bindings/subscription_binding.dart';
 import 'package:eradah/app/modules/subscription/views/subscription_view.dart';
 import 'package:eradah/app/modules/trial/bindings/trial_binding.dart';
@@ -132,6 +132,11 @@ class AppPages {
       name: Routes.TRIAL,
       page: () => TrialView(),
       binding: TrialBinding(),
+    ),
+    GetPage(
+      name: Routes.SUBSCRIPATION_PAGE,
+      page: () => SubscripationPageView(),
+      binding: SubscripationPageBinding(),
     ),
   ];
 }

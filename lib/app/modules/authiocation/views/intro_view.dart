@@ -70,7 +70,7 @@ class IntroView extends GetView {
           SizedBox(
             width: 40,
             height: 40,
-            child: SvgPicture.asset('asset/images/logo.svg'),
+            child:Container(),
           ),
           Container(
             child: InkWell(
@@ -132,16 +132,16 @@ class IntroView extends GetView {
                   height: 20,
                 ),
                 Text(
-                  'تؤثر الخبرات المبكرة لطفلك على نمو الجهاز العصبي و الجهاز العضلي الهيكلي ',
+                  'تؤثرالخبرات المبكرة لطفلك على نمو الجهاز العصبي و الجهاز العضلي الهيكلي',
                   style: themeData.textTheme.subtitle1,
                   textAlign: TextAlign.center,
-                    maxLines: 1,
+                    maxLines: 2,
                 ),
                     Text(
                   'يوفر هذا التطبيق لجميع المعالم التنموية الحركية للأطفال في المستقبل',
                   style: themeData.textTheme.subtitle1,
                   textAlign: TextAlign.center,
-                  maxLines: 1,
+                  maxLines: 2,
                 ),
               ],
             ),
@@ -181,7 +181,7 @@ class IntroView extends GetView {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   SizedBox(
-                    child: SvgPicture.asset('asset/images/intro2.svg'),
+                    child: Image.asset('asset/images/1.jpg'),
                   ),
                   SizedBox(
                     height: 20,

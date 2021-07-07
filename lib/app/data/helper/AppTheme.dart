@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-Color KprimaryColor = Color(0xFF00A0AD);
+Color KprimaryColor = Color(0xFF0DB7C5);
 Color KscandColor = Color(0xFF74828C);
 
 ThemeData themeData = ThemeData(

@@ -1,9 +1,13 @@
+import 'package:eradah/app/data/helper/AppConstant.dart';
+import 'package:eradah/app/data/helper/AppTheme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import '../controllers/subscription_controller.dart';
 
 class SubscriptionView extends GetView<SubscriptionController> {
+  var selectindex = 1.obs;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -40,83 +44,101 @@ class SubscriptionView extends GetView<SubscriptionController> {
           SizedBox(
             height: 20,
           ),
-          Row(
-            children: [
-              SizedBox(
-                width: 10,
-              ),
-              Expanded(
-                child: Container(
-                  height: 150,
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: Color(0xff699799),
-                    ),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          'سنوي',
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white,
-                          ),
-                        ),
-                        SizedBox(
-                          height: 5,
-                        ),
-                        Text(
-                          'L.E 11.990',
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
+          Obx(() {
+            return Row(
+              children: [
+                SizedBox(
+                  width: 10,
                 ),
-              ),
-              SizedBox(
-                width: 10,
-              ),
-              Expanded(
-                child: Container(
-                  color: Colors.grey,
-                  height: 150,
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: Color(0xffD60B51),
-                    ),
-                    child: Center(
+                Expanded(
+                  child: InkWell(
+                    onTap: () {
+                      selectindex.value = 2;
+                    },
+                    child: Container(
+                      height: 150,
+                      child: Container(
+                        decoration: BoxDecoration(
+                          color: selectindex.value == 2
+                              ? Color(0xffD60B51)
+                              : Colors.black,
+                        ),
                         child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          'شهري',
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white,
-                          ),
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              priceList.elementAt(0)['title'],
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white,
+                              ),
+                            ),
+                            SizedBox(
+                              height: 5,
+                            ),
+                            Text(
+                              priceList.elementAt(0)['price'],
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white,
+                              ),
+                            ),
+                          ],
                         ),
-                        SizedBox(
-                          height: 5,
-                        ),
-                        Text('L.E 11.990',
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white,
-                            )),
-                      ],
-                    )),
+                      ),
+                    ),
                   ),
                 ),
-              ),
-              SizedBox(
-                width: 10,
-              ),
-            ],
-          ),
+                SizedBox(
+                  width: 10,
+                ),
+                Expanded(
+                  child: InkWell(
+                    onTap: () {
+                      selectindex.value = 1;
+                    },
+                    child: Container(
+                      color: Colors.grey,
+                      height: 150,
+                      child: Container(
+                        decoration: BoxDecoration(
+                          color: selectindex.value == 1
+                              ? Color(0xffD60B51)
+                              : Colors.black,
+                        ),
+                        child: Center(
+                            child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              priceList.elementAt(1)['title'],
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white,
+                              ),
+                            ),
+                            SizedBox(
+                              height: 5,
+                            ),
+                            Text(
+                              priceList.elementAt(1)['price'],
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white,
+                              ),
+                            ),
+                          ],
+                        )),
+                      ),
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  width: 10,
+                ),
+              ],
+            );
+          }),
           SizedBox(
             height: 60,
           ),
@@ -129,6 +151,23 @@ class SubscriptionView extends GetView<SubscriptionController> {
                   fontWeight: FontWeight.bold,
                 ),
               ),
+            ),
+          ),
+          SizedBox(
+            height: 20,
+          ),
+          SizedBox(
+            width: Get.width * .8,
+            height: 60,
+            child: ElevatedButton(
+              onPressed: () {
+                controller.setSendBackage(selectindex.value);
+              },
+              style: ButtonStyle(
+                backgroundColor:
+                    MaterialStateProperty.all<Color>(KprimaryColor),
+              ),
+              child: Text(' اشترك الان '),
             ),
           )
         ],

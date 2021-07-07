@@ -22,14 +22,15 @@ class ActivitiesDetailView extends GetView<ActivitiesDetailController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('أسم النشاط'),
+        title: Text('الأنشطة'),
         centerTitle: true,
       ),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
             children: [
-              bulidSlider(),
+              //bulidSlider(),
+              Container(child: Image.asset('asset/images/Group 15529.png'),),
               FutureBuilder(
                   future:
                       controller.vedioCategories(Get.arguments[0].toString()),

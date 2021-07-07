@@ -16,10 +16,35 @@ class ActivitiesListView extends GetView<ActivitiesListController> {
     ActivitiesListController controller = Get.put(ActivitiesListController());
 
     return Scaffold(
+      appBar: AppBar(
+        leading: SizedBox.shrink(),
+        title: Text(
+          'الأنشطة',
+          style: TextStyle(
+            fontSize: 14,
+            fontWeight: FontWeight.bold,
+            color: Colors.white,
+          ),
+        ),
+        centerTitle: true,
+      ),
       body: SingleChildScrollView(
         child: Column(
           children: [
-            bulidSlider(),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Container(
+                decoration:
+                    BoxDecoration(border: Border.all(color: Colors.blueAccent)),
+                child: Padding(
+                  padding: const EdgeInsets.all(20),
+                  child: Text( 'عليك في كل مجال أن تختار الأنشطة التي تساعد طفلك علي أن يُحسِن ما يستطيع عمله فعلا ثم أنطلق إلى الخطوة التالية وفي كثير من الأحيان يكون النشاط الذي يساعد طفلك في مجال معين مساعدًا في مجالات أخري كذلك' ,
+                    style: TextStyle(),
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+              ),
+            ),
             Obx(() {
               return FutureBuilder(
                 future: controller.categoriesList.value,
@@ -127,7 +152,7 @@ Container bulidSlider() {
                       height: 10,
                     ),
                     Text(
-                      'تؤثر التجارب و الخبرات الحركية المبكرة لطفلك على تطورات بنية الجهاز العصبي و العضلي و الهيكلي',
+                      'اختر المهارات المناسبة ${KuserName.value} لتتأكد من طرق التحسين',
                       style: TextStyle(
                         color: Colors.white,
                         fontWeight: FontWeight.bold,

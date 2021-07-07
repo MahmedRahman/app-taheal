@@ -13,18 +13,7 @@ class HomeView extends GetView<HomeController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        leading: SizedBox.shrink(),
-        title: Text(
-          'الرئسية',
-          style: TextStyle(
-            fontSize: 14,
-            fontWeight: FontWeight.bold,
-            color: Colors.white,
-          ),
-        ),
-        centerTitle: true,
-      ),
+
       bottomNavigationBar: Obx(() {
         return Directionality(
           textDirection: TextDirection.rtl,

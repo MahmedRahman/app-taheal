@@ -17,9 +17,23 @@ class LevelsListView extends GetView<LevelsListController> {
 
     //<LevelsListController>();
     return Scaffold(
+            appBar: AppBar(
+        leading: SizedBox.shrink(),
+        title: Text(
+          'مستوياتي',
+          style: TextStyle(
+            fontSize: 14,
+            fontWeight: FontWeight.bold,
+            color: Colors.white,
+          ),
+        ),
+        centerTitle: true,
+      ),
       body: ListView(
         children: [
+          
           bulidSlider(),
+ 
           SizedBox(
             height: 10,
           ),

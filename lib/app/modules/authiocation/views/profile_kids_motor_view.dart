@@ -33,9 +33,10 @@ class ProfilekidsMotorView extends GetView<AuthiocationController> {
         body: Column(
           children: [
             AuthiocationHeader(
-              title: 'اختر الوظيفة الحركية الإجمالية لطفلك بناء على',
+              title: 'اختر الوظيفة الحركية الإجمالية لطفلك',
               subTitle:
-                  'صفحة الوظائف الحركية تكون اختر الوظيفة الحركية الاجمالية لطفلك',
+                  '',
+            
             ),
             Obx(() {
               return Container(
@@ -50,8 +51,7 @@ class ProfilekidsMotorView extends GetView<AuthiocationController> {
                         (index) {
                           return InkWell(
                             onTap: () {
-                              print(MotorFunctions.elementAt(index)['id']
-                                  .toString());
+                         
                               selectkidsMotor.value = index.toString();
                               controller.motorFunction.value = int.parse(
                                 MotorFunctions.elementAt(index)['id'],

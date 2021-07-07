@@ -114,6 +114,7 @@ class SigninView extends GetView<AuthiocationController> {
                       ),
                       SizedBox(
                         width: Get.width * .9,
+                        height: 60,
                         child: ClipRRect(
                           borderRadius: BorderRadius.all(Radius.circular(5)),
                           child: CustemButton(
@@ -183,15 +184,9 @@ class AuthiocationHeader extends StatelessWidget {
         children: [
           Padding(
             padding: EdgeInsets.all(8),
-            child: SvgPicture.asset(
-              'asset/images/signin.svg',
-              width: 80,
-            ),
+            child: Image.asset('asset/images/logo.png',width: 150,)          
           ),
-          Text(
-            'Dr.Kids Taheal',
-            style: headline3,
-          ),
+         
           SizedBox(
             height: 5,
           ),

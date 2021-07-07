@@ -45,8 +45,10 @@ class AuthiocationController extends GetxController {
 
   @override
   void onInit() {
-    email.text = "mohamed02@gmail.com";
-    password.text = "123123";
+    // email.text = "mohamed02@gmail.com";
+    // password.text = "123123";
+
+    email.text = '';
     super.onInit();
   }
 
@@ -93,6 +95,9 @@ class AuthiocationController extends GetxController {
 
     if (responsModel.success) {
       Response response = responsModel.data;
+
+      priceList = response.body['data'][0]['backges'];
+
       final staticDataModel = staticDataModelFromJson(response.bodyString);
       staticDataModel.data.elementAt(0).diagnostics.forEach((element) {
         Diagnosis.add({
@@ -196,18 +201,28 @@ class AuthiocationController extends GetxController {
 
       if (userlogModel.success) {
         final userlogModel = userlogModelFromJson(response.bodyString);
-        var firstName = userlogModel.data.elementAt(0).childName.toString();
-        var email = userlogModel.data.elementAt(0).email.toString();
-        var accessToken = userlogModel.data.elementAt(0).accessToken.toString();
-        KuserName.value = firstName;
-        Get.find<UserAuth>().setUserToken(accessToken);
-        Get.find<UserAuth>().setUserEmail(email);
-        Get.find<UserAuth>().setUserName(firstName);
-        Get.toNamed(Routes.TRIAL);
+
+        if (userlogModel.data.first.status == 'not_valid') {
+          Get.defaultDialog(
+            content: Container(
+              child: Text('لقد تم الانتها من الفترة التجربية '),
+            ),
+          );
+        } else {
+          var firstName = userlogModel.data.elementAt(0).childName.toString();
+          var email = userlogModel.data.elementAt(0).email.toString();
+          var accessToken =
+              userlogModel.data.elementAt(0).accessToken.toString();
+          KuserName.value = firstName;
+          Get.find<UserAuth>().setUserToken(accessToken);
+          Get.find<UserAuth>().setUserEmail(email);
+          Get.find<UserAuth>().setUserName(firstName);
+          Get.offAndToNamed(Routes.TRIAL);
+        }
       } else {
         showSnackBar(
           title: appName,
-          message: 'خطاء فى كلمة المرو',
+          message: 'خطأ في كلمة المرور',
           snackbarStatus: () {},
         );
       }

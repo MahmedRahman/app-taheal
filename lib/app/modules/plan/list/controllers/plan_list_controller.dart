@@ -26,8 +26,9 @@ class PlanListController extends GetxController {
         ...videoPlanModel.data.vediosMotorFunction,
         ...videoPlanModel.data.myVedio
       ];
-print(videoPlanModel.data.vediosMotorFunction.length);
-print(videoPlanModel.data.myVedio.length);
+      
+      print(videoPlanModel.data.vediosMotorFunction.length);
+      print(videoPlanModel.data.myVedio.length);
       print(VedioList.length);
 
       List<MyVedio> VedioComplateList =

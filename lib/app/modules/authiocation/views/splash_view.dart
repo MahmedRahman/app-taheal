@@ -42,12 +42,7 @@ class SplashView extends GetView<AuthiocationController>  {
                   height: 15,
                 ),
           
-                Center(
-                  child: Text(
-                    'kid’s developmental milestone',
-                    style: themeData.textTheme.headline5,
-                  ),
-                ),
+             
                 SizedBox(
                   height: 60,
                   child: Center(

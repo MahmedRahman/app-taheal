@@ -32,7 +32,7 @@ class ProfileCreateView extends GetView<AuthiocationController> {
             SizedBox(
               width: Get.width * .8,
               child: Text(
-                'جاري انشاء خطتك العلاجية بناءً على النوع والعمر ومعالم النمو الحركي',
+                'جاري إنشاء خطة علاجية لطفلك بناءاً على درجة أتزانه وأنماط حركته وحالة مفاصله وحالة الجهاز العضلي الحركي',
                 textAlign: TextAlign.center,
                 style: TextStyle(fontWeight: FontWeight.bold),
               ),

@@ -16,6 +16,7 @@ Future vedioCategories(String vedios_cat_id) async {
       Response response = responsModel.data;
       final categoryvedioModel =
           categoryvedioModelFromJson(response.bodyString);
+          
       return categoryvedioModel.data;
     }
   }
@@ -35,7 +36,7 @@ Future vedioCategories(String vedios_cat_id) async {
           Get.toNamed(Routes.HOME);
           final PlanListController c = Get.find();
           c.getPlan();
-          
+
         }
       }
     }

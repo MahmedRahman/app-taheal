@@ -66,6 +66,7 @@ class ProfileKidsView extends GetView<AuthiocationController> {
                           fontWeight: FontWeight.bold,
                         ),
                       ),
+                      /*
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 20),
                         child: Text(
@@ -76,7 +77,7 @@ class ProfileKidsView extends GetView<AuthiocationController> {
                           ),
                           textAlign: TextAlign.center,
                         ),
-                      ),
+                      ),*/
                       /*
                       Obx(() {
                         return Row(
@@ -213,7 +214,7 @@ class ProfileKidsView extends GetView<AuthiocationController> {
                                     ),
                                   ),
                                   CustemBottomSheet(
-                                    label: 'ألتشخيص',
+                                    label: 'التشخيص',
                                     dataList: Diagnosis.map(
                                         (e) => e['title'].toString()).toList(),
                                     idList:

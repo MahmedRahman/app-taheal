@@ -1,6 +1,8 @@
 import 'package:eradah/app/api/response_model.dart';
 import 'package:eradah/app/api/web_serives.dart';
 import 'package:eradah/app/modules/levels/detail/model/question.dart';
+import 'package:eradah/app/modules/levels/detail/views/levels_box.dart';
+import 'package:eradah/app/modules/levels/detail/views/pop.dart';
 import 'package:get/get.dart';
 
 class LevelsDetailController extends GetxController {
@@ -10,14 +12,27 @@ class LevelsDetailController extends GetxController {
 
   getQestion(int quetionsid) async {
     QuestionId = quetionsid;
+
     ResponsModel responsModel =
         await WebSerives().getQuetionsCategoryDetailes(quetionsid: quetionsid);
+
     if (responsModel.success) {
       Response response = responsModel.data;
 
+      //print(response.bodyString.toString());
+
       final quetionsModel = quetionsModelFromJson(response.bodyString);
-      QestionListFutter.value = Future.value(quetionsModel.data);
-      //return quetionsModel.data;
+
+       QestionListFutter.value = Future.value(quetionsModel.data);
+/*
+      if (quetionsModel.data
+              .where((element) => element.complate != '1')
+              .length ==
+          0) {
+        Get.to(PopScreen());
+      };
+*/
+     
     }
   }
 
@@ -29,9 +44,7 @@ class LevelsDetailController extends GetxController {
 
     if (responsModel.success) {
       Response response = responsModel.data;
-      if(response.body['success']){
-        
-      }
+      if (response.body['success']) {}
       getQestion(QuestionId);
     }
   }

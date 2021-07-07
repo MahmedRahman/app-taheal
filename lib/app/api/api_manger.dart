@@ -68,6 +68,15 @@ class APIManger extends GetConnect {
           );
           break;
 
+        case 401:
+          if (showLoading) {
+            EasyLoading.showSuccess('Done');
+          }
+
+          Get.toNamed(Routes.SigninView);
+
+          break;
+
         default:
           if (showLoading) {
             EasyLoading.showError('Error');

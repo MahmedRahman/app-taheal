@@ -1,3 +1,8 @@
+import 'package:eradah/app/data/helper/AppConstant.dart';
+import 'package:eradah/app/modules/acount/views/Privacy.dart';
+import 'package:eradah/app/modules/acount/views/about.dart';
+import 'package:eradah/app/modules/acount/views/subscription_paeg.dart';
+import 'package:eradah/app/modules/acount/views/trems.dart';
 import 'package:eradah/app/routes/app_pages.dart';
 import 'package:eradah/app/data/helper/AppTheme.dart';
 import 'package:eradah/auth.dart';
@@ -7,6 +12,7 @@ import 'package:get/get.dart';
 import 'package:eradah/app/modules/acount/controllers/acount_controller.dart';
 
 class AcountView extends GetView<AcountController> {
+  AcountController controller = Get.put(AcountController());
   List<String> Listimage = [
     'asset/account/01.svg',
     'asset/account/02.svg',
@@ -27,58 +33,70 @@ class AcountView extends GetView<AcountController> {
 
   @override
   Widget build(BuildContext context) {
+    controller.mybackage();
     return Scaffold(
+      appBar: AppBar(
+        leading: SizedBox.shrink(),
+        title: Text(
+          'حسابي',
+          style: TextStyle(
+            fontSize: 14,
+            fontWeight: FontWeight.bold,
+            color: Colors.white,
+          ),
+        ),
+        centerTitle: true,
+      ),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.symmetric(vertical: 15),
           child: Container(
             child: Center(
-              child: Column(
+              child: ListView(
                 children: [
                   Container(
                     child: Column(
                       children: [
                         Center(
-                          child: SvgPicture.asset('asset/images/logo.svg'),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 10),
-                          child: Center(
-                            child: RichText(
-                              text: TextSpan(
-                                text: '',
-                                children: [
-                                  TextSpan(
-                                      text: 'D',
-                                      style: themeData.textTheme.headline6),
-                                  TextSpan(
-                                      text: 'r',
-                                      style: themeData.textTheme.headline6),
-                                  TextSpan(
-                                    text: '.',
-                                    style: themeData.textTheme.headline6
-                                        .copyWith(color: Colors.black),
-                                  ),
-                                  TextSpan(
-                                      text: 'Kids',
-                                      style: themeData.textTheme.headline6),
-                                  TextSpan(text: ' '),
-                                  TextSpan(
-                                    text: 'Taheal',
-                                    style: themeData.textTheme.headline6
-                                        .copyWith(color: Colors.black),
-                                  ),
-                                ],
-                              ),
-                            ),
+                          child: Container(
+                            width: 150,
+                            child: Image.asset('asset/images/logo.png'),
                           ),
+                        ),
+                        SizedBox(
+                          height: 10,
                         ),
                         Text(
                           Get.find<UserAuth>().getUserName(),
                           style: TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 15),
+                            fontWeight: FontWeight.bold,
+                            fontSize: 15,
+                          ),
                         ),
-                        Text(Get.find<UserAuth>().getUserEmail())
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Text(
+                          Get.find<UserAuth>().getUserEmail(),
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Text(
+                          backage_name.toString(),
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Text(
+                          start_backage.toString(),
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Text(
+                          end_backage.toString(),
+                        ),
                       ],
                     ),
                   ),
@@ -104,7 +122,7 @@ class AcountView extends GetView<AcountController> {
                           color: KprimaryColor,
                         ),
                       ),
-                      ListTile(
+                      /*  ListTile(
                           onTap: () {},
                           title: Text(
                             'مركز المساعدة',
@@ -116,11 +134,15 @@ class AcountView extends GetView<AcountController> {
                             textAlign: TextAlign.right,
                           ),
                           trailing: SvgPicture.asset('asset/account/02.svg'),
-                          leading: Text('01002089079')),
+                          leading: Text('0100000000')),
+                */
+
                       ListTile(
-                        onTap: () {},
+                        onTap: () {
+                          Get.to(About());
+                        },
                         title: Text(
-                          'حول ارادة',
+                          'حول Doctor Child Care',
                           style: TextStyle(
                             color: Colors.black,
                             fontWeight: FontWeight.w500,
@@ -133,10 +155,51 @@ class AcountView extends GetView<AcountController> {
                           Icons.arrow_forward_ios,
                           color: KprimaryColor,
                         ),
-                      ),    ListTile(
-                        onTap: () {},
+                      ),
+                      ListTile(
+                        onTap: () {
+                          Get.to(Privacy());
+                        },
                         title: Text(
                           'سياسة الخصوصية',
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontWeight: FontWeight.w500,
+                            fontSize: 15,
+                          ),
+                          textAlign: TextAlign.right,
+                        ),
+                        trailing: SvgPicture.asset('asset/account/03.svg'),
+                        leading: Icon(
+                          Icons.arrow_forward_ios,
+                          color: KprimaryColor,
+                        ),
+                      ),
+                      /*ListTile(
+                        onTap: () {
+                          Get.to(Trems());
+                        },
+                        title: Text(
+                          'شروط واحكام',
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontWeight: FontWeight.w500,
+                            fontSize: 15,
+                          ),
+                          textAlign: TextAlign.right,
+                        ),
+                        trailing: SvgPicture.asset('asset/account/03.svg'),
+                        leading: Icon(
+                          Icons.arrow_forward_ios,
+                          color: KprimaryColor,
+                        ),
+                      ),*/
+                      ListTile(
+                        onTap: () {
+                          Get.to(SubscriptionPage());
+                        },
+                        title: Text(
+                          'صفحة الاشترك',
                           style: TextStyle(
                             color: Colors.black,
                             fontWeight: FontWeight.w500,
@@ -153,6 +216,7 @@ class AcountView extends GetView<AcountController> {
                       ListTile(
                         onTap: () {
                           Get.find<UserAuth>().setUserToken(null);
+                          
                           Get.toNamed(Routes.SigninView);
                         },
                         title: Text(
@@ -165,7 +229,6 @@ class AcountView extends GetView<AcountController> {
                           textAlign: TextAlign.right,
                         ),
                         trailing: SvgPicture.asset('asset/account/06.svg'),
-                       
                       ),
                     ],
                   )

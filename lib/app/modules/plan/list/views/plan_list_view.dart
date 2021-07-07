@@ -22,76 +22,92 @@ class PlanListView extends GetView<PlanListController> {
   Widget build(BuildContext context) {
     PlanListController controller = Get.put(PlanListController());
 
-    return ListView(
-      children: [
-        InkWell(
-          onTap: (){
-            Get.toNamed(Routes.SUBSCRIPTION);
-          },
-          child: Image.asset('asset/images/baner.png'),
+    return Scaffold(
+
+            appBar: AppBar(
+        leading: SizedBox.shrink(),
+        title: Text(
+          'خطتى',
+          style: TextStyle(
+            fontSize: 14,
+            fontWeight: FontWeight.bold,
+            color: Colors.white,
+          ),
         ),
-        Obx(() {
-          return Row(
-            children: [
-              Expanded(
-                child: Container(
-                  color: isSelect.value ? KprimaryColor : Colors.white,
-                  child: TextButton(
-                    onPressed: () {
-                      isSelect.value = true;
-                    },
-                    child: Column(
-                      children: [
-                        SvgPicture.asset('asset/images/calendar1.svg'),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        Text(
-                          'الانشطة الحالية',
-                          style: TextStyle(
-                            color:
-                                isSelect.value ? Colors.white : KprimaryColor,
-                            fontWeight: FontWeight.bold,
+        centerTitle: true,
+      ),
+
+      body: ListView(
+        children: [
+          InkWell(
+            onTap: () {
+              Get.toNamed(Routes.SUBSCRIPTION);
+            },
+            child: Image.asset('asset/images/baner.png'),
+          ),
+          Obx(() {
+            return Row(
+              children: [
+                Expanded(
+                  child: Container(
+                    color: isSelect.value ? KprimaryColor : Colors.white,
+                    child: TextButton(
+                      onPressed: () {
+                        isSelect.value = true;
+                      },
+                      child: Column(
+                        children: [
+                          SvgPicture.asset('asset/images/calendar1.svg'),
+                          SizedBox(
+                            height: 10,
                           ),
-                        ),
-                      ],
+                          Text(
+                            'الانشطة الحالية',
+                            style: TextStyle(
+                              color:
+                                  isSelect.value ? Colors.white : KprimaryColor,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ),
-              ),
-              Expanded(
-                child: Container(
-                  color: isSelect.value ? Colors.white : KprimaryColor,
-                  child: TextButton(
-                    onPressed: () {
-                      isSelect.value = false;
-                    },
-                    child: Column(
-                      children: [
-                        SvgPicture.asset('asset/images/calendar2.svg'),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        Text(
-                          'الانشطة السابقة',
-                          style: TextStyle(
-                            color:
-                                isSelect.value ? KprimaryColor : Colors.white,
-                            fontWeight: FontWeight.bold,
+                Expanded(
+                  child: Container(
+                    color: isSelect.value ? Colors.white : KprimaryColor,
+                    child: TextButton(
+                      onPressed: () {
+                        isSelect.value = false;
+                      },
+                      child: Column(
+                        children: [
+                          SvgPicture.asset('asset/images/calendar2.svg'),
+                          SizedBox(
+                            height: 10,
                           ),
-                        ),
-                      ],
+                          Text(
+                            'الانشطة السابقة',
+                            style: TextStyle(
+                              color:
+                                  isSelect.value ? KprimaryColor : Colors.white,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ),
-              ),
-            ],
-          );
-        }),
-        Obx(() {
-          return isSelect.value ? listVideo(0) : listVideo(1);
-        }),
-      ],
+              ],
+            );
+          }),
+          Obx(() {
+            return isSelect.value ? listVideo(0) : listVideo(1);
+          }),
+        ],
+      ),
     );
   }
 }
@@ -241,8 +257,13 @@ class listVideo extends GetView<PlanListController> {
         },
         child: Column(
           children: [
-            Divider(height: 5,thickness: 5,color: Color(HexColorFormString().getColorFromHex(
-                                  myVedio.color)),),
+            Divider(
+              height: 5,
+              thickness: 5,
+              color: Color(
+                HexColorFormString().getColorFromHex(myVedio.color),
+              ),
+            ),
             Directionality(
               textDirection: TextDirection.rtl,
               child: ListTile(
@@ -254,8 +275,9 @@ class listVideo extends GetView<PlanListController> {
                     height: 32,
                     child: SvgPicture.asset(
                       'asset/images/sign.svg',
-                      color: Color(HexColorFormString().getColorFromHex(
-                                  myVedio.color)),
+                      color: Color(
+                        HexColorFormString().getColorFromHex(myVedio.color),
+                      ),
                     ),
                   ),
                 ),
@@ -264,8 +286,8 @@ class listVideo extends GetView<PlanListController> {
                   '${myVedio.title} ',
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
-                    color: Color(HexColorFormString().getColorFromHex(
-                                  myVedio.color)),
+                    color: Color(
+                        HexColorFormString().getColorFromHex(myVedio.color)),
                   ),
                 ),
                 subtitle: Text(
